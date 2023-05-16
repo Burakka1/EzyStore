@@ -28,11 +28,8 @@ public class MainActivity extends AppCompatActivity {
                 Email = EmailTextView.getText().toString();
                 Password = PasswordTextview.getText().toString();
                 System.out.println(Email);
-<<<<<<< HEAD
                 //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-=======
 
->>>>>>> 973cb6d5bfe527b298ceef5b04b3c02e56371ff8
             }
         });
     }
