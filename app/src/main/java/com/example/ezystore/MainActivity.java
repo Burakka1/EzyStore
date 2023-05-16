@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 Password = PasswordTextview.getText().toString();
                 System.out.println(Email);
                 //git aynı anda deneme
+                //gitfdsfs
             }
         });
     }
