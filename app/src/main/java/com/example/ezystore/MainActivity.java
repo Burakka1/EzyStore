@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
                 Email = EmailTextView.getText().toString();
                 Password = PasswordTextview.getText().toString();
                 System.out.println(Email);
+                // denemeeeeeeeeeeeeee
             }
         });
     }
