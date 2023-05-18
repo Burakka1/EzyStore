@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "441727276297",
+    "project_id": "ezystore-bce7c",
+    "storage_bucket": "ezystore-bce7c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441727276297:android:861ed56d42e44130c62fd8",
+        "android_client_info": {
+          "package_name": "com.example.ezystore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441727276297-6b3uqf7jnnl1s13060d20ievv1mk32sb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfwEAQKDzV5KEBi1NzDFPv467xEXaqykI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441727276297-6b3uqf7jnnl1s13060d20ievv1mk32sb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

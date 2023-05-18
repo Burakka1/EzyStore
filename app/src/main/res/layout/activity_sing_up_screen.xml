@@ -22,7 +22,7 @@
         />
 
     <EditText
-        android:id="@+id/resetemailEditText"
+        android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -48,7 +48,21 @@
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetemailEditText"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        />
+    <EditText
+        android:id="@+id/repeatpasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:hint="Şifre tekrarı"
+        android:textColorHint="#808080"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
         />
 
     <Button
@@ -58,42 +72,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:onClick="Login"
+        android:onClick="NewMember"
         android:paddingStart="32dp"
         android:paddingEnd="32dp"
-        android:text="Giriş Yap"
+        android:text="Üye Ol"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
-
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        android:onClick="PasswordReset"
-        android:text="Şifreni mi unuttun?"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/singUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ResetButton" />
-
-    <TextView
-        android:id="@+id/singUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="SingUp"
-        android:text="Üye ol"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/forgotPassword"
-        app:layout_constraintTop_toBottomOf="@+id/ResetButton" />
+        app:layout_constraintTop_toBottomOf="@+id/repeatpasswordEditText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
