@@ -19,7 +19,7 @@
             android:name=".PasswordReset"
             android:exported="false" />
         <activity
-            android:name=".SingUpScreen"
+            android:name=".SignUpScreen"
             android:exported="false" />
         <activity
             android:name=".MainActivity2"

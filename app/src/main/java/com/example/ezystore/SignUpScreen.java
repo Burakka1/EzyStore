@@ -8,16 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.ezystore.databinding.ActivityMainBinding;
 import com.example.ezystore.databinding.ActivitySingUpScreenBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SingUpScreen extends AppCompatActivity {
+public class SignUpScreen extends AppCompatActivity {
 
-
+    String Email;
+    String Password;
+    String RepeatPassword;
     private ActivitySingUpScreenBinding binding;
     private FirebaseAuth auth;
 
@@ -34,13 +35,13 @@ public class SingUpScreen extends AppCompatActivity {
     }
 
     public void NewMember(View view) {
-        String Email = binding.emailEditText.getText().toString();
-        String Password = binding.passwordEditText.getText().toString();
-        String RepeatPassword = binding.repeatpasswordEditText.getText().toString();
+         Email = binding.emailEditText.getText().toString();
+         Password = binding.passwordEditText.getText().toString();
+         RepeatPassword = binding.repeatpasswordEditText.getText().toString();
 
         if (Email.equals("") || Password.equals("") || RepeatPassword.equals("")) {
 
-            Toast.makeText(SingUpScreen.this, "Tüm alanları Doldurunuz!", Toast.LENGTH_LONG).show();
+            Toast.makeText(SignUpScreen.this, "Tüm alanları Doldurunuz!", Toast.LENGTH_LONG).show();
 
         } else {
             if (Password.equals(RepeatPassword)) {
@@ -48,19 +49,18 @@ public class SingUpScreen extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
 
-                        Intent intent = new Intent(SingUpScreen.this, MainActivity.class);
-                        Toast.makeText(SingUpScreen.this, "Kaydınız Yapıldı", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignUpScreen.this, preliminaryinformation.class);
                         startActivity(intent);
                         finish();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(SingUpScreen.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(SignUpScreen.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
             } else {
-                Toast.makeText(SingUpScreen.this, "Şifreler Uyuşmuyor!", Toast.LENGTH_LONG).show();
+                Toast.makeText(SignUpScreen.this, "Şifreler Uyuşmuyor!", Toast.LENGTH_LONG).show();
             }
 
         }

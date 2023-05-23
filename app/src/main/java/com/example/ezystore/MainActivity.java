@@ -2,21 +2,15 @@ package com.example.ezystore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ezystore.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void SingUp(View view) {
-        Intent intent = new Intent(MainActivity.this, SingUpScreen.class);
+        Intent intent = new Intent(MainActivity.this, SignUpScreen.class);
         startActivity(intent);
         finish();
 

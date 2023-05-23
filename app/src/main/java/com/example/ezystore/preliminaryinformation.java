@@ -51,8 +51,6 @@ public class preliminaryinformation extends AppCompatActivity {
         } else {
             Toast.makeText(preliminaryinformation.this, "Telefon numaranızı başında sıfır olmadan 10 hane giriniz", Toast.LENGTH_LONG).show();
         }
-
-
     }
 
     public void Save(View view) {
@@ -68,6 +66,7 @@ public class preliminaryinformation extends AppCompatActivity {
                 public void onSuccess(DocumentReference documentReference) {
 
                     Intent intent = new Intent(preliminaryinformation.this, MainActivity.class);
+                    Toast.makeText(preliminaryinformation.this, "Kaydınız Tamamlandı", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                     finish();
                 }
