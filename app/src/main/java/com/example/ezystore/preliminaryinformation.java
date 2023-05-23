@@ -38,46 +38,53 @@ public class preliminaryinformation extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        fullname = binding.fullName.getText().toString();
-        adress = binding.adress.getText().toString();
-        phoneNumber = "";
-        if (binding.phoneNumber.getText().toString().length() == 10) {
-            phoneNumber = binding.phoneNumber.getText().toString();
 
-            postData.put("FullName", fullname);
-            postData.put("Adress", adress);
-            postData.put("PhoneNumber", phoneNumber);
-            //postData.put("Email",Email);
-        } else {
-            Toast.makeText(preliminaryinformation.this, "Telefon numaranızı başında sıfır olmadan 10 hane giriniz", Toast.LENGTH_LONG).show();
-        }
     }
 
     public void Save(View view) {
 
+        fullname = binding.fullName.getText().toString();
+        adress = binding.adress.getText().toString();
+        phoneNumber = binding.phoneNumber.getText().toString();
+
 
         if (fullname.equals("") || adress.equals("") || phoneNumber.equals("")) {
+            System.out.println(fullname + " " + adress + " " + phoneNumber);
             Toast.makeText(preliminaryinformation.this, "Tüm alanları doldurunuz!", Toast.LENGTH_LONG).show();
-
         } else {
+            if (binding.phoneNumber.getText().toString().length() == 10) {
+                phoneNumber = binding.phoneNumber.getText().toString();
+                postData.put("FullName", fullname);
+                postData.put("Adress", adress);
+                postData.put("PhoneNumber", phoneNumber);
+                //postData.put("Email",Email);
 
-            firebaseFirestore.collection("informations").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                @Override
-                public void onSuccess(DocumentReference documentReference) {
+                firebaseFirestore.collection("informations").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
 
-                    Intent intent = new Intent(preliminaryinformation.this, MainActivity.class);
-                    Toast.makeText(preliminaryinformation.this, "Kaydınız Tamamlandı", Toast.LENGTH_LONG).show();
-                    startActivity(intent);
-                    finish();
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
+                        Intent intent = new Intent(preliminaryinformation.this, MainActivity.class);
+                        Toast.makeText(preliminaryinformation.this, "Kaydınız Tamamlandı", Toast.LENGTH_LONG).show();
+                        startActivity(intent);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
 
-                    Toast.makeText(preliminaryinformation.this, "Beklenmedik Hata!", Toast.LENGTH_LONG).show();
-                }
-            });
+                        Toast.makeText(preliminaryinformation.this, "Beklenmedik Hata!", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            } else {
+
+                Toast.makeText(preliminaryinformation.this, "Telefon numaranızı başında sıfır olmadan 10 hane giriniz", Toast.LENGTH_LONG).show();
+
+            }
+
         }
+
+
     }
 
 

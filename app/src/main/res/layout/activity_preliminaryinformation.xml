@@ -45,11 +45,12 @@
         android:layout_marginTop="16dp"
         android:hint="Adresinizi Giriniz"
         android:textColorHint="#808080"
-        android:inputType="textPassword"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullName"
         />
+
     <EditText
         android:id="@+id/phoneNumber"
         android:layout_width="match_parent"
