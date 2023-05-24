@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeScreen">
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="351dp"
+        android:background="#FFFFFF"
+
+        android:text="Ürünler"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="43dp"
+        android:layout_height="54dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="317dp"
+        android:layout_marginTop="290dp"
+        android:fontFamily="sans-serif"
+        android:inputType="textMultiLine"
+        android:text="Kişisel Bakım"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="225dp"
+        android:layout_marginTop="288dp"
+        android:fontFamily="sans-serif"
+        android:text="Kırtasiye"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="288dp"
+        android:fontFamily="sans-serif"
+        android:text="Ev Eşyaları"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="317dp"
+        android:layout_marginTop="203dp"
+        android:fontFamily="sans-serif"
+        android:text="Aletler"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="203dp"
+        android:fontFamily="sans-serif"
+        android:text="Kıyafet"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="203dp"
+        android:fontFamily="sans-serif"
+        android:text="Hediyelik"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="80dp"
+        android:layout_height="56dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="288dp"
+        android:fontFamily="sans-serif"
+        android:inputType="textMultiLine"
+        android:text="Evcil Hayvan Malzemeleri"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="28dp"
+        android:background="#E4DFDF"
+        android:queryHint="Ürün Adı">
+
+    </SearchView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="102dp"
+        android:background="#FFFFFF"
+
+        android:text="@string/kategoriler"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:typeface="normal" />
+
+    <ImageButton
+        android:id="@+id/imgbtnResim3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="148dp"
+        android:background="#FFF6E4"
+        android:contentDescription="@string/k_yafet"
+        android:src="@drawable/ic_outline_dry_cleaning_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="148dp"
+        android:background="#E4F3EA"
+        android:contentDescription="@string/bilgisayar"
+        android:src="@drawable/ic_baseline_computer_24"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="148dp"
+        android:background="#FFECE8"
+        android:contentDescription="@string/hediyelik"
+        android:src="@drawable/ic_baseline_card_giftcard_24"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="313dp"
+        android:layout_marginTop="148dp"
+        android:background="#F1EDFC"
+        android:contentDescription="@string/aletler"
+        android:src="@drawable/ic_outline_construction_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginTop="235dp"
+        android:background="#F1EDFC"
+        android:src="@drawable/ic_twotone_home_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim6"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="236dp"
+        android:background="#FFF6E4"
+        android:src="@drawable/ic_baseline_pets_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim7"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="236dp"
+        android:background="#FFECE8"
+        android:src="@drawable/ic_outline_print_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/imgbtnResim8"
+        android:layout_width="48dp"
+        android:layout_height="47dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="313dp"
+        android:layout_marginTop="236dp"
+        android:background="#E4F3EA"
+        android:src="@drawable/ic_baseline_shower_24"
+        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
+
+    </ImageButton>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="203dp"
+        android:fontFamily="sans-serif"
+        android:text="Bilgisayar"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+</RelativeLayout>
