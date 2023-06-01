@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.ezystore.databinding.ActivityMainBinding;
@@ -18,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public String Email;
     public String Password;
+    Button ResetButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        ResetButton = findViewById(R.id.ResetButton);
 
 
         auth = FirebaseAuth.getInstance();
@@ -45,8 +49,18 @@ public class MainActivity extends AppCompatActivity {
             auth.signInWithEmailAndPassword(Email, Password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
+                    ResetButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(MainActivity.this,HomeScreen.class);
+                            startActivity(intent);
+                        }
+                    });
 
-                    // HomeScreen
+
+                    Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                    startActivity(intent);
+                    finish();
 
                 }
             }).addOnFailureListener(new OnFailureListener() {

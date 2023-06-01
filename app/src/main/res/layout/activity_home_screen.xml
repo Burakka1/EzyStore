@@ -7,6 +7,111 @@
     android:layout_height="match_parent"
     tools:context=".HomeScreen">
 
+    <!--<ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="173dp"
+        android:layout_height="223dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="220dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corner"
+        android:elevation="5dp"
+        android:paddingBottom="60dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_baseline_computer_24" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="172dp"
+        android:layout_height="222dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_corner"
+        android:elevation="5dp"
+        android:paddingBottom="60dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_baseline_computer_24" />-->
+
+   <!-- <TextView
+        android:id="@+id/textView8"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="top"
+        android:layout_marginStart="221dp"
+        android:layout_marginEnd="-4dp"
+        android:layout_marginBottom="67dp"
+        android:elevation="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
+        android:text="Ürün Adı"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="top"
+        android:layout_marginStart="222dp"
+        android:layout_marginEnd="-5dp"
+        android:layout_marginBottom="41dp"
+        android:backgroundTint="#FF0000"
+        android:elevation="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
+        android:text="1.500 TL"
+        android:textColor="#EC0000"
+        android:textColorHint="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="top"
+        android:layout_marginStart="21dp"
+        android:layout_marginBottom="66dp"
+        android:elevation="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
+        android:text="Ürün Adı"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="194dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="top"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="196dp"
+        android:layout_marginBottom="41dp"
+        android:backgroundTint="#FF0000"
+        android:elevation="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:padding="8dp"
+        android:text="1.500 TL"
+        android:textColor="#EC0000"
+        android:textColorHint="#000000"
+        android:textSize="16sp" />-->
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
@@ -14,7 +119,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="351dp"
+        android:layout_marginTop="334dp"
         android:background="#FFFFFF"
 
         android:text="Ürünler"
@@ -31,7 +136,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="317dp"
-        android:layout_marginTop="290dp"
+        android:layout_marginTop="279dp"
         android:fontFamily="sans-serif"
         android:inputType="textMultiLine"
         android:text="Kişisel Bakım"
@@ -46,7 +151,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="225dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="277dp"
         android:fontFamily="sans-serif"
         android:text="Kırtasiye"
         android:textColor="#000000"
@@ -60,7 +165,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
         android:layout_marginStart="45dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="277dp"
         android:fontFamily="sans-serif"
         android:text="Ev Eşyaları"
         android:textColor="#000000"
@@ -73,22 +178,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="317dp"
-        android:layout_marginTop="203dp"
+        android:layout_marginTop="192dp"
         android:fontFamily="sans-serif"
         android:text="Aletler"
-        android:textColor="#000000"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="230dp"
-        android:layout_marginTop="203dp"
-        android:fontFamily="sans-serif"
-        android:text="Kıyafet"
         android:textColor="#000000"
         android:textSize="14sp" />
 
@@ -99,9 +191,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="203dp"
+        android:layout_marginTop="192dp"
         android:fontFamily="sans-serif"
         android:text="Hediyelik"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="192dp"
+        android:fontFamily="sans-serif"
+        android:text="Kıyafet"
         android:textColor="#000000"
         android:textSize="14sp" />
 
@@ -113,26 +218,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginStart="128dp"
-        android:layout_marginTop="288dp"
+        android:layout_marginTop="277dp"
         android:fontFamily="sans-serif"
         android:inputType="textMultiLine"
         android:text="Evcil Hayvan Malzemeleri"
         android:textColor="#000000"
         android:textSize="14sp" />
-
-    <SearchView
-        android:id="@+id/searchView"
-        android:layout_width="360dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="27dp"
-        android:layout_marginTop="28dp"
-        android:background="#E4DFDF"
-        android:queryHint="Ürün Adı">
-
-    </SearchView>
 
     <TextView
         android:id="@+id/textView2"
@@ -141,7 +232,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="11dp"
-        android:layout_marginTop="102dp"
+        android:layout_marginTop="91dp"
         android:background="#FFFFFF"
 
         android:text="@string/kategoriler"
@@ -150,6 +241,20 @@
         android:textStyle="bold"
         android:typeface="normal" />
 
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="17dp"
+        android:background="#E4DFDF"
+        android:queryHint="Ürün Adı">
+
+    </androidx.appcompat.widget.SearchView>
+
     <ImageButton
         android:id="@+id/imgbtnResim3"
         android:layout_width="wrap_content"
@@ -157,7 +262,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="228dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="137dp"
         android:background="#FFF6E4"
         android:contentDescription="@string/k_yafet"
         android:src="@drawable/ic_outline_dry_cleaning_24"
@@ -172,7 +277,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="137dp"
         android:background="#E4F3EA"
         android:contentDescription="@string/bilgisayar"
         android:src="@drawable/ic_baseline_computer_24"
@@ -187,7 +292,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="141dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="137dp"
         android:background="#FFECE8"
         android:contentDescription="@string/hediyelik"
         android:src="@drawable/ic_baseline_card_giftcard_24"
@@ -202,7 +307,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="313dp"
-        android:layout_marginTop="148dp"
+        android:layout_marginTop="137dp"
         android:background="#F1EDFC"
         android:contentDescription="@string/aletler"
         android:src="@drawable/ic_outline_construction_24"
@@ -217,7 +322,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="235dp"
+        android:layout_marginTop="224dp"
         android:background="#F1EDFC"
         android:src="@drawable/ic_twotone_home_24"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
@@ -231,7 +336,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="141dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="225dp"
         android:background="#FFF6E4"
         android:src="@drawable/ic_baseline_pets_24"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
@@ -245,7 +350,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="228dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="225dp"
         android:background="#FFECE8"
         android:src="@drawable/ic_outline_print_24"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
@@ -259,7 +364,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="313dp"
-        android:layout_marginTop="236dp"
+        android:layout_marginTop="225dp"
         android:background="#E4F3EA"
         android:src="@drawable/ic_baseline_shower_24"
         tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck">
@@ -273,10 +378,32 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="203dp"
+        android:layout_marginTop="192dp"
         android:fontFamily="sans-serif"
         android:text="Bilgisayar"
         android:textColor="#000000"
         android:textSize="14sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="2" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </RelativeLayout>
