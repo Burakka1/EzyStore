@@ -1,0 +1,135 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Ürün Adı -->
+
+    <!-- Ürün Resmi -->
+
+    <TextView
+        android:id="@+id/textProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Ürün Adı :"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editProductName"
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+        android:layout_alignBaseline="@id/textProductName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="21dp"
+        android:layout_toEndOf="@id/textProductName"
+        android:background="@drawable/rounded_corner"
+        android:hint=" Ürün Adı" />
+
+    <ImageView
+        android:id="@+id/imageProduct"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/textProductImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/rounded_corner"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_question_mark_24" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonUploadImage"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="Açıklamalar :"
+        android:textSize="16sp" />
+
+    <Button
+
+        android:id="@+id/buttonUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageProduct"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/button_rounded"
+        android:text="RESİM YÜKLE"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textProductImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editProductName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:text="Ürün Resmi"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/editDescription"
+        android:layout_width="374dp"
+        android:layout_height="38dp"
+        android:layout_below="@id/textDescription"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_corner"
+        android:hint=" Buraya yazınız" />
+
+
+    <!-- Açıklamalar -->
+
+    <!-- Ürün Ekle -->
+    <Button
+        android:id="@+id/buttonAddProduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_rounded"
+        android:text="ÜRÜN EKLE"
+        android:textColor="@android:color/white" />
+
+    <Spinner
+        android:id="@+id/spinnerOptions"
+        android:layout_width="287dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/editProductName"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="21dp"
+        android:layout_marginBottom="496dp"
+        android:background="@drawable/rounded_corner"
+
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="77dp"
+        android:text="Kategori Adı :"
+        android:textSize="16sp" />
+
+</RelativeLayout>
+
+
+
