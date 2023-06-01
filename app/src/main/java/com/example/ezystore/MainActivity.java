@@ -3,7 +3,6 @@ package com.example.ezystore;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public String Email;
     public String Password;
-    Button LoginButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +26,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-        LoginButton = findViewById(R.id.LoginButton);
-
 
         auth = FirebaseAuth.getInstance();
-
 
     }
 

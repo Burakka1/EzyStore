@@ -51,10 +51,10 @@ public class AddProduct extends AppCompatActivity {
 
         spinnerOptions = findViewById(R.id.spinnerOptions);
 
-        // Spinner için seçenekleri belirleyin
+
         String[] options = {"Bilgisayar", "Seçenek 2", "Seçenek 3"};
 
-        // ArrayAdapter kullanarak Spinner'a seçenekleri ekleyin
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, options);
         spinnerOptions.setAdapter(adapter);

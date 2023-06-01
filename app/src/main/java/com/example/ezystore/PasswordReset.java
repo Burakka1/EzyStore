@@ -2,15 +2,11 @@ package com.example.ezystore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
-
-import com.example.ezystore.databinding.ActivityMainBinding;
 import com.example.ezystore.databinding.ActivityPasswordResetBinding;
-import com.example.ezystore.databinding.ActivitySingUpScreenBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
