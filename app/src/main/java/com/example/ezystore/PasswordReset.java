@@ -30,7 +30,7 @@ public class PasswordReset extends AppCompatActivity {
 
     public void ResetPassword(View view){
 
-        String Email = binding.resetemailEditText.getText().toString();
+        String Email = binding.ResetEmailEditText.getText().toString();
         if (Email.equals("")){
             Toast.makeText(PasswordReset.this, "Emailinizi Giriniz!", Toast.LENGTH_LONG).show();
         }else {

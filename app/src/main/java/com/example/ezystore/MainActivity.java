@@ -1,6 +1,8 @@
 package com.example.ezystore;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     public String Email;
     public String Password;
+    SharedPreferences sharedPreferences;
 
 
     @Override
@@ -26,14 +29,23 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
-
+        sharedPreferences = this.getSharedPreferences("com.example.ezystore", Context.MODE_PRIVATE);
         auth = FirebaseAuth.getInstance();
+
+        String CEmail = sharedPreferences.getString("Email","");
+        String CPassword = sharedPreferences.getString("Password","");
+        Boolean isboolean = sharedPreferences.getBoolean("isboolean",false);
+        if (!CEmail.equals("") && !CPassword.equals("") && !isboolean.equals(false)){
+                binding.EmailEditText.setText(CEmail);
+                binding.passwordEditText.setText(CPassword);
+                binding.checkBox.setChecked(isboolean);
+        }
 
     }
 
     public void Login(View view) {
 
-         Email = binding.resetemailEditText.getText().toString();
+         Email = binding.EmailEditText.getText().toString();
          Password = binding.passwordEditText.getText().toString();
 
         if (Email.equals("") || Password.equals("")) {
@@ -45,11 +57,23 @@ public class MainActivity extends AppCompatActivity {
             auth.signInWithEmailAndPassword(Email, Password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Intent intent = new Intent(MainActivity.this, AddProduct.class);
-                    startActivity(intent);
-                    finish();
+                    if (binding.checkBox.isChecked()){
+                        sharedPreferences.edit().putString("Email",Email).apply();
+                        sharedPreferences.edit().putString("Password",Password).apply();
+                        sharedPreferences.edit().putBoolean("isboolean",true).apply();
+                        Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                        startActivity(intent);
+                        finish();
 
+                    }else {
+                        sharedPreferences.edit().remove("Email").apply();
+                        sharedPreferences.edit().remove("Password").apply();
+                        sharedPreferences.edit().remove("isboolean").apply();
 
+                        Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                        startActivity(intent);
+                        finish();
+                    }
 
 
                 }

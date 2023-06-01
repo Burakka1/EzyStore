@@ -31,13 +31,21 @@
         android:background="@drawable/rounded_corner"
         android:hint=" Ürün Adı" />
 
+
+    <!-- Açıklamalar -->
+
+    <!-- Ürün Ekle -->
+
     <ImageView
         android:id="@+id/imageProduct"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_below="@id/textProductImage"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="8dp"
+        android:layout_below="@+id/textProductImage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="151dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="140dp"
         android:background="@drawable/rounded_corner"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_baseline_question_mark_24" />
@@ -46,9 +54,9 @@
         android:id="@+id/textDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonUploadImage"
+        android:layout_below="@+id/buttonUploadImage"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="12dp"
         android:text="Açıklamalar :"
         android:textSize="16sp" />
 
@@ -57,9 +65,10 @@
         android:id="@+id/buttonUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageProduct"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/imageProduct"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="133dp"
         android:background="@drawable/button_rounded"
         android:text="RESİM YÜKLE"
         android:textColor="@android:color/white" />
@@ -68,9 +77,10 @@
         android:id="@+id/textProductImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/editProductName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_below="@+id/categoryNameText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="153dp"
         android:text="Ürün Resmi"
         android:textSize="16sp" />
 
@@ -78,17 +88,13 @@
         android:id="@+id/editDescription"
         android:layout_width="374dp"
         android:layout_height="38dp"
-        android:layout_below="@id/textDescription"
+        android:layout_below="@+id/textDescription"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_corner"
         android:hint=" Buraya yazınız" />
 
-
-    <!-- Açıklamalar -->
-
-    <!-- Ürün Ekle -->
     <Button
         android:id="@+id/buttonAddProduct"
         android:layout_width="match_parent"
@@ -102,16 +108,29 @@
         android:text="ÜRÜN EKLE"
         android:textColor="@android:color/white" />
 
+
+    <EditText
+        android:id="@+id/categoryNameText"
+        android:layout_width="274dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spinnerOptions"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="29dp"
+        android:ems="10"
+        android:hint="Yeni Kategori için Buraya yazınız"
+        android:inputType="textPersonName" />
+
     <Spinner
         android:id="@+id/spinnerOptions"
         android:layout_width="276dp"
         android:layout_height="38dp"
-        android:layout_below="@+id/editProductName"
 
+        android:layout_below="@+id/editProductName"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
         android:layout_toEndOf="@+id/textView"
         android:background="@drawable/rounded_corner" />
 
@@ -125,6 +144,15 @@
         android:layout_marginTop="77dp"
         android:text="Kategori Adı :"
         android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/addbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"
+        android:text="Ekle" />
+
 
 </RelativeLayout>
 

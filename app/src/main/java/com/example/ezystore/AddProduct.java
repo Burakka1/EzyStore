@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,16 +29,25 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class AddProduct extends AppCompatActivity {
 
     private Button buttonUploadImage;
+    Button addbutton;
     private ImageView imageProduct;
     EditText editProductName;
     EditText editDescription;
+    EditText categoryNameText;
     private Button buttonAddProduct;
     private Uri ImageUri;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -48,23 +58,55 @@ public class AddProduct extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
-
+        buttonAddProduct = findViewById(R.id.buttonAddProduct);
+        addbutton = findViewById(R.id.addbutton);
+        editProductName = findViewById(R.id.editProductName);
+        editDescription = findViewById(R.id.editDescription);
+        categoryNameText = findViewById(R.id.categoryNameText);
+        buttonUploadImage = findViewById(R.id.buttonUploadImage);
+        imageProduct = findViewById(R.id.imageProduct);
         spinnerOptions = findViewById(R.id.spinnerOptions);
 
+        ArrayList<String> options = new ArrayList<>();
+        options.add("Bilgisayar");
 
-        String[] options = {"Bilgisayar", "Seçenek 2", "Seçenek 3"};
+        db.collection("Category")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            List<String> options = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                                String option = document.getString("CategoryName");
+                                options.add(option);
+                            }
+                            // Verileri kullanarak istediğiniz işlemleri yapabilirsiniz
+                        } else {
+                            // Veri yoksa veya sorgu başarısız olduysa yapılacak işlemler
+                        }
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Sorgu başarısız olduysa yapılacak işlemler
+                    }
+                });
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, options);
         spinnerOptions.setAdapter(adapter);
 
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                options.add(categoryNameText.getText().toString());
+                categoryNameText.setText("");
 
-        buttonAddProduct = findViewById(R.id.buttonAddProduct);
-        editProductName = findViewById(R.id.editProductName);
-        editDescription = findViewById(R.id.editDescription);
-        buttonUploadImage = findViewById(R.id.buttonUploadImage);
-        imageProduct = findViewById(R.id.imageProduct);
+            }
+        });
 
         ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -96,6 +138,8 @@ public class AddProduct extends AppCompatActivity {
             public void onClick(View v) {
                 if (ImageUri != null) {
                     uploadToFirebase(ImageUri);
+                    SaveFirestore(spinnerOptions.getSelectedItem().toString());
+
                 } else {
                     Toast.makeText(AddProduct.this, "Lütfen Resim Seçiniz", Toast.LENGTH_SHORT).show();
                 }
@@ -156,5 +200,25 @@ public class AddProduct extends AppCompatActivity {
         ContentResolver contentResolver = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
+    }
+
+    private void SaveFirestore(String Name){
+
+
+        db.collection("Category")
+                .add(Name)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        documentReference.update("CategoryName",Name);
+                        System.out.println("EKLENDİ");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        System.out.println("HATA");
+                    }
+                });
+
     }
 }

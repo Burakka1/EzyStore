@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,51 +11,48 @@
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:text="Hoş Geldiniz"
-        android:textSize="24sp"
         android:textColor="#000000"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/EmailEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/resetemailEditText"
-        android:layout_width="match_parent"
+        android:id="@+id/EmailEditText"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
         android:hint="E-posta adresinizi giriniz"
-        android:textColorHint="#808080"
         android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="#808080"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginBottom="7dp"
         android:hint="Şifrenizi giriniz"
-        android:textColorHint="#808080"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="#808080"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetemailEditText"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/LoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="32dp"
         android:onClick="Login"
         android:paddingStart="32dp"
@@ -67,33 +63,41 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
     <TextView
         android:id="@+id/forgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginEnd="64dp"
         android:onClick="PasswordReset"
         android:text="Şifreni mi unuttun?"
         android:textColor="#000000"
+        app:layout_constraintBaseline_toBaselineOf="@+id/singUp"
         app:layout_constraintEnd_toStartOf="@+id/singUp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
+        app:layout_constraintStart_toStartOf="@+id/LoginButton" />
 
     <TextView
         android:id="@+id/singUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="64dp"
         android:onClick="SingUp"
         android:text="Üye ol"
         android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/forgotPassword"
+        app:layout_constraintEnd_toEndOf="@+id/LoginButton"
         app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="110dp"
+        android:layout_height="35dp"
+        android:text="Beni Hatırla"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
