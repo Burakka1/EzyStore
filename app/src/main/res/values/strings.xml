@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">EzyStore</string>
-<<<<<<< HEAD
+    <
+    <
+    <
+    <
+    <
+    <
+    < HEAD
     <string name="title_activity_maps">MapsActivity</string>
-=======
+    =======
     <string name="kategoriler">Kategoriler</string>
     <string name="bilgisayar">Bilgisayar</string>
     <string name="hediyelik">Hediyelik</string>
     <string name="aletler">Aletler</string>
     <string name="k_yafet">Kıyafet</string>
->>>>>>> cb3a10e6d51b19646ef00e217bb4b9dff6bbe853
+    >>>>>>> cb3a10e6d51b19646ef00e217bb4b9dff6bbe853
 </resources>
