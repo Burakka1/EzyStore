@@ -68,7 +68,10 @@ public class AddProduct extends AppCompatActivity {
         spinnerOptions = findViewById(R.id.spinnerOptions);
 
         ArrayList<String> options = new ArrayList<>();
+        Map<String ,String > Category = new HashMap<>();
         options.add("Bilgisayar");
+
+
 
         db.collection("Category")
                 .get()
@@ -89,22 +92,22 @@ public class AddProduct extends AppCompatActivity {
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
+                    public void onFailure(Exception e) {
                         // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
-
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_dropdown_item, options);
         spinnerOptions.setAdapter(adapter);
 
+
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 options.add(categoryNameText.getText().toString());
+                Category.put("CategoryName",categoryNameText.getText().toString());
                 categoryNameText.setText("");
-
             }
         });
 
@@ -138,7 +141,7 @@ public class AddProduct extends AppCompatActivity {
             public void onClick(View v) {
                 if (ImageUri != null) {
                     uploadToFirebase(ImageUri);
-                    SaveFirestore(spinnerOptions.getSelectedItem().toString());
+                    SaveFirestore(Category);
 
                 } else {
                     Toast.makeText(AddProduct.this, "Lütfen Resim Seçiniz", Toast.LENGTH_SHORT).show();
@@ -202,7 +205,7 @@ public class AddProduct extends AppCompatActivity {
         return mime.getExtensionFromMimeType(contentResolver.getType(fileUri));
     }
 
-    private void SaveFirestore(String Name){
+    private void SaveFirestore(Map Name){
 
 
         db.collection("Category")
@@ -210,7 +213,7 @@ public class AddProduct extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        documentReference.update("CategoryName",Name);
+                        documentReference.update(Name);
                         System.out.println("EKLENDİ");
                     }
                 }).addOnFailureListener(new OnFailureListener() {
