@@ -52,7 +52,7 @@
         />
 
     <Button
-        android:id="@+id/ResetButton"
+        android:id="@+id/LoginButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -80,7 +80,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/singUp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ResetButton" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 
     <TextView
         android:id="@+id/singUp"
@@ -93,7 +93,7 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/forgotPassword"
-        app:layout_constraintTop_toBottomOf="@+id/ResetButton" />
+        app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
