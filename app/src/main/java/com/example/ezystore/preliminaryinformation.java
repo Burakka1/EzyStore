@@ -86,6 +86,11 @@ public class preliminaryinformation extends AppCompatActivity {
 
 
     }
+    public void map(View view){
+        Intent intent = new Intent(preliminaryinformation.this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 }
