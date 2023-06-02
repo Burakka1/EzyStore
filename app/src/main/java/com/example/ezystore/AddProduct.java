@@ -69,9 +69,6 @@ public class AddProduct extends AppCompatActivity {
 
         ArrayList<String> options = new ArrayList<>();
         Map<String ,String > Category = new HashMap<>();
-        options.add("Bilgisayar");
-
-
 
         db.collection("Category")
                 .get()
@@ -84,7 +81,11 @@ public class AddProduct extends AppCompatActivity {
                                 String option = document.getString("CategoryName");
                                 options.add(option);
                             }
-                            // Verileri kullanarak istediğiniz işlemleri yapabilirsiniz
+
+                            ArrayAdapter<String> adapter = new ArrayAdapter<>(AddProduct.this,
+                                    android.R.layout.simple_spinner_dropdown_item, options);
+                            spinnerOptions.setAdapter(adapter);
+
                         } else {
                             // Veri yoksa veya sorgu başarısız olduysa yapılacak işlemler
                         }
@@ -97,17 +98,15 @@ public class AddProduct extends AppCompatActivity {
                     }
                 });
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_dropdown_item, options);
-        spinnerOptions.setAdapter(adapter);
 
 
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                options.add(categoryNameText.getText().toString());
                 Category.put("CategoryName",categoryNameText.getText().toString());
+                SaveFirestore(Category); // silincek denemelık yazdık
                 categoryNameText.setText("");
+                recreate(); // ekran yenileme yapıyor
             }
         });
 
