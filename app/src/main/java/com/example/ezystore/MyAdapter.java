@@ -1,6 +1,7 @@
 package com.example.ezystore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,29 +32,42 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return dataList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if (layoutInflater==null) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        if (layoutInflater == null) {
             layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
-        if (convertView ==null){
-            convertView =layoutInflater.inflate(R.layout.grid_item,null);
+        if (convertView == null) {
+            convertView = layoutInflater.inflate(R.layout.grid_item, null);
         }
-        ImageView gridImage =convertView.findViewById(R.id.gridImage);
-        TextView gridCaption =convertView.findViewById(R.id.gridCaption);
-        TextView gridCaption2 =convertView.findViewById(R.id.gridCaption2);
+        ImageView gridImage = convertView.findViewById(R.id.gridImage);
+        TextView gridCaption = convertView.findViewById(R.id.gridCaption);
+        TextView gridCaption2 = convertView.findViewById(R.id.gridCaption2);
         Glide.with(context).load(dataList.get(position).getImageURL()).into(gridImage);
         gridCaption.setText(dataList.get(position).getProductName());
         gridCaption2.setText(dataList.get(position).getPrice());
 
+        // Kart tıklama olayını burada tanımlayalım
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ProductDescriptions ekranına geçiş yapma işlemlerini burada gerçekleştirin
+                String productName = dataList.get(position).getProductName();
+                Intent intent = new Intent(context, ProductDescriptionsActivity.class);
+                intent.putExtra("productName", productName);
+                context.startActivity(intent);
+            }
+        });
+
         return convertView;
     }
 }
+
