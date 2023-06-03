@@ -42,7 +42,7 @@ public class DataClass {
         this.description = description;
     }
 
-    public DataClass(String imageURL, String productName, String description) {
+    public DataClass(String imageURL, String productName, String description,String price) {
         this.imageURL = imageURL;
         this.productName = productName;
         this.description = description;

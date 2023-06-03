@@ -48,6 +48,7 @@ public class AddProduct extends AppCompatActivity {
     EditText editProductName;
     EditText editDescription;
     EditText categoryNameText;
+    EditText editProductPrice;
     private Button buttonAddProduct;
     private Uri ImageUri;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
@@ -66,6 +67,7 @@ public class AddProduct extends AppCompatActivity {
         buttonUploadImage = findViewById(R.id.buttonUploadImage);
         imageProduct = findViewById(R.id.imageProduct);
         spinnerOptions = findViewById(R.id.spinnerOptions);
+        editProductPrice = findViewById(R.id.editProductPrice);
 
         ArrayList<String> options = new ArrayList<>();
         Map<String ,String > Category = new HashMap<>();
@@ -152,6 +154,7 @@ public class AddProduct extends AppCompatActivity {
     private void uploadToFirebase(Uri uri) {
         String productName = editProductName.getText().toString();
         String description = editDescription.getText().toString();
+        String price = editProductPrice.getText().toString();
         final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         UploadTask uploadTask = imageReference.putFile(uri);
 
@@ -171,7 +174,7 @@ public class AddProduct extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     // Resmin URL'sini Firestore'a ekleme
-                    DataClass dataClass = new DataClass(downloadUri.toString(), productName, description);
+                    DataClass dataClass = new DataClass(downloadUri.toString(), productName, description,price);
                     db.collection("Products").add(dataClass)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override

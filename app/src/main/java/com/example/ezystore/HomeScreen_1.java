@@ -31,6 +31,7 @@ public class HomeScreen_1 extends AppCompatActivity {
     private ArrayList<DataClass> dataList;
     private MyAdapter adapter;
     private CategoryAdapter adapter2;
+
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<Category> categoryList;
     private FirebaseFirestore firestore;

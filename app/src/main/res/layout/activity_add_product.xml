@@ -17,6 +17,16 @@
         android:text="Ürün Adı :"
         android:textSize="16sp" />
 
+    <TextView
+        android:id="@+id/textProductPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textProductName"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="26dp"
+        android:text="Ürün Fiyatı :"
+        android:textSize="16sp" />
+
     <EditText
         android:id="@+id/editProductName"
         android:layout_width="285dp"
@@ -35,6 +45,20 @@
     <!-- Açıklamalar -->
 
     <!-- Ürün Ekle -->
+
+    <EditText
+        android:id="@+id/editProductPrice"
+        android:layout_width="285dp"
+        android:layout_height="35dp"
+
+        android:layout_below="@+id/editProductName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/textProductName"
+        android:background="@drawable/rounded_corner"
+        android:hint=" Ürün Fiyatı" />
 
     <ImageView
         android:id="@+id/imageProduct"
@@ -126,11 +150,11 @@
         android:layout_width="276dp"
         android:layout_height="38dp"
 
-        android:layout_below="@+id/editProductName"
+        android:layout_below="@+id/editProductPrice"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="31dp"
         android:layout_toEndOf="@+id/textView"
         android:background="@drawable/rounded_corner" />
 
@@ -138,10 +162,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textProductPrice"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="77dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
         android:text="Kategori Adı :"
         android:textSize="16sp" />
 
@@ -150,7 +174,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/categoryNameText"
         android:text="Ekle" />
 
 
