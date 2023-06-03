@@ -27,9 +27,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridCaption"
         android:text="Caption"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="@color/black"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        />
 
 
     <TextView
@@ -37,8 +40,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridCaption2"
         android:text="Caption"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textColor="#ff0000"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="0dp"/>
 
 </LinearLayout>

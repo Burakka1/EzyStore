@@ -14,4 +14,10 @@
         <!-- Customize your theme here. -->
 
     </style>
+    <style name="Theme.EzyStore.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.EzyStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.EzyStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

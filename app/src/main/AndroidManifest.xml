@@ -47,6 +47,8 @@
         <activity
             android:name=".SignUpScreen"
             android:exported="false" />
+        <activity android:name=".HomeScreen_1"
+            android:exported="false"/>
         <activity
             android:name=".MainActivity2"
             android:exported="false">

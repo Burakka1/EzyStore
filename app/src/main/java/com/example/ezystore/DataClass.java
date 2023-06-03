@@ -3,12 +3,21 @@ package com.example.ezystore;
 import android.view.contentcapture.DataRemovalRequest;
 
 public class DataClass {
-    private String imageURL, productName, description;
+    private String imageURL, productName, description, price;
+
+
 
     public DataClass(){
 
     }
 
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
     public String getImageURL() {
         return imageURL;
     }
@@ -37,6 +46,7 @@ public class DataClass {
         this.imageURL = imageURL;
         this.productName = productName;
         this.description = description;
+        this.price=price;
     }
 
 

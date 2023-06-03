@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         sharedPreferences.edit().putString("Email",Email).apply();
                         sharedPreferences.edit().putString("Password",Password).apply();
                         sharedPreferences.edit().putBoolean("isboolean",true).apply();
-                        Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                        Intent intent = new Intent(MainActivity.this, HomeScreen_1.class);
                         startActivity(intent);
                         finish();
 
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         sharedPreferences.edit().remove("Password").apply();
                         sharedPreferences.edit().remove("isboolean").apply();
 
-                        Intent intent = new Intent(MainActivity.this, AddProduct.class);
+                        Intent intent = new Intent(MainActivity.this, HomeScreen_1.class);
                         startActivity(intent);
                         finish();
                     }

@@ -51,9 +51,9 @@ public class MyAdapter extends BaseAdapter {
         TextView gridCaption =convertView.findViewById(R.id.gridCaption);
         TextView gridCaption2 =convertView.findViewById(R.id.gridCaption2);
         Glide.with(context).load(dataList.get(position).getImageURL()).into(gridImage);
-        /*gridCaption.setText(dataList.get(position).getCaption());
-        gridCaption2.setText(dataList.get(position).getCaption());
-*/
+        gridCaption.setText(dataList.get(position).getProductName());
+        gridCaption2.setText(dataList.get(position).getPrice());
+
         return convertView;
     }
 }
