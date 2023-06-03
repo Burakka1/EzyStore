@@ -1,7 +1,5 @@
 package com.example.ezystore;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +13,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
 
 
-    private Context context;
+
     private List<Category> categoryList;
 
     public CategoryAdapter(List<Category> categoryList) {
@@ -33,6 +31,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Category category = categoryList.get(position);
         holder.categoryNameTextView.setText(category.getCategoryName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               System.out.println(category.getCategoryName());
+
+            }
+        });
+
     }
 
     @Override

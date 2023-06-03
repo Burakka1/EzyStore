@@ -72,13 +72,15 @@ public class AddProduct extends AppCompatActivity {
         ArrayList<String> options = new ArrayList<>();
         Map<String ,String > Category = new HashMap<>();
 
+        //List<String> options = new ArrayList<>();
+
         db.collection("Category")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
-                            List<String> options = new ArrayList<>();
+                            options.clear(); // Önceki değerleri temizle
                             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                                 String option = document.getString("CategoryName");
                                 options.add(option);
@@ -102,6 +104,7 @@ public class AddProduct extends AppCompatActivity {
 
 
 
+
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,6 +112,7 @@ public class AddProduct extends AppCompatActivity {
                 SaveFirestore(Category); // silincek denemelık yazdık
                 categoryNameText.setText("");
                 recreate(); // ekran yenileme yapıyor
+
             }
         });
 
@@ -142,7 +146,7 @@ public class AddProduct extends AppCompatActivity {
             public void onClick(View v) {
                 if (ImageUri != null) {
                     uploadToFirebase(ImageUri);
-                    SaveFirestore(Category);
+
 
                 } else {
                     Toast.makeText(AddProduct.this, "Lütfen Resim Seçiniz", Toast.LENGTH_SHORT).show();
@@ -155,6 +159,7 @@ public class AddProduct extends AppCompatActivity {
         String productName = editProductName.getText().toString();
         String description = editDescription.getText().toString();
         String price = editProductPrice.getText().toString();
+        String ticket = spinnerOptions.getSelectedItem().toString();
         final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
         UploadTask uploadTask = imageReference.putFile(uri);
 
@@ -174,14 +179,14 @@ public class AddProduct extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
                     // Resmin URL'sini Firestore'a ekleme
-                    DataClass dataClass = new DataClass(downloadUri.toString(), productName, description,price);
+                    DataClass dataClass = new DataClass(downloadUri.toString(), productName, description,price,ticket);
                     db.collection("Products").add(dataClass)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     // Başarı durumunda yapılacak işlemler
                                     Toast.makeText(AddProduct.this, "Resim Başarıyla Yüklendi", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddProduct.this, HomeScreen.class);
+                                    Intent intent = new Intent(AddProduct.this, HomeScreen_1.class);
                                     startActivity(intent);
                                     finish();
                                 }
@@ -216,12 +221,12 @@ public class AddProduct extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         documentReference.update(Name);
-                        System.out.println("EKLENDİ");
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        System.out.println("HATA");
+
                     }
                 });
 

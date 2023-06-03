@@ -61,7 +61,7 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // ProductDescriptions ekranına geçiş yapma işlemlerini burada gerçekleştirin
                 String productName = dataList.get(position).getProductName();
-                Intent intent = new Intent(context, ProductDescriptionsActivity.class);
+                Intent intent = new Intent(context, AddProduct.class);
                 intent.putExtra("productName", productName);
                 context.startActivity(intent);
             }
