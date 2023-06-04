@@ -2,16 +2,13 @@ package com.example.ezystore;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
@@ -61,7 +58,7 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // ProductDescriptions ekranına geçiş yapma işlemlerini burada gerçekleştirin
                 String productName = dataList.get(position).getProductName();
-                Intent intent = new Intent(context, AddProduct.class);
+                Intent intent = new Intent(context, ProductDescriptionsActivity.class);
                 intent.putExtra("productName", productName);
                 context.startActivity(intent);
             }

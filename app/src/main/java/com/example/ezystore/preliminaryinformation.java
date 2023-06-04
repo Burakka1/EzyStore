@@ -32,7 +32,6 @@ public class preliminaryinformation extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-
         auth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
@@ -43,7 +42,6 @@ public class preliminaryinformation extends AppCompatActivity {
         fullname = binding.fullName.getText().toString();
         adress = binding.adress.getText().toString();
         phoneNumber = binding.phoneNumber.getText().toString();
-
 
         if (fullname.equals("") || adress.equals("") || phoneNumber.equals("")) {
             System.out.println(fullname + " " + adress + " " + phoneNumber);
@@ -78,9 +76,7 @@ public class preliminaryinformation extends AppCompatActivity {
                 Toast.makeText(preliminaryinformation.this, "Telefon numaranızı başında sıfır olmadan 10 hane giriniz", Toast.LENGTH_LONG).show();
 
             }
-
         }
-
 
     }
     public void map(View view){

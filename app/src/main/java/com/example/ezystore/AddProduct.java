@@ -6,7 +6,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -14,14 +13,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,10 +31,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AddProduct extends AppCompatActivity {
@@ -72,8 +67,6 @@ public class AddProduct extends AppCompatActivity {
         ArrayList<String> options = new ArrayList<>();
         Map<String ,String > Category = new HashMap<>();
 
-        //List<String> options = new ArrayList<>();
-
         db.collection("Category")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -101,7 +94,6 @@ public class AddProduct extends AppCompatActivity {
                         // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
-
 
 
 
@@ -186,7 +178,7 @@ public class AddProduct extends AppCompatActivity {
                                 public void onSuccess(DocumentReference documentReference) {
                                     // Başarı durumunda yapılacak işlemler
                                     Toast.makeText(AddProduct.this, "Resim Başarıyla Yüklendi", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddProduct.this, HomeScreen_1.class);
+                                    Intent intent = new Intent(AddProduct.this, HomeScreen.class);
                                     startActivity(intent);
                                     finish();
                                 }

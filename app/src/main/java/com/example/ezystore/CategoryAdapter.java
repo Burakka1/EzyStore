@@ -10,15 +10,19 @@ import java.util.List;
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
-
-
+    private HomeScreen homeScreen_;
+    String ticket;
 
 
     private List<Category> categoryList;
 
-    public CategoryAdapter(List<Category> categoryList) {
+    public CategoryAdapter(List<Category> categoryList, HomeScreen homeScreen_) {
         this.categoryList = categoryList;
+        this.homeScreen_ = homeScreen_;
+        this.ticket ="Home";
     }
+
+
 
     @NonNull
     @Override
@@ -35,7 +39,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               System.out.println(category.getCategoryName());
+              // System.out.println(category.getCategoryName());
+                ticket = category.getCategoryName();
+                homeScreen_.loadDataFromFirestorefilter(ticket);
 
             }
         });

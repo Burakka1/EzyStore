@@ -1,6 +1,5 @@
 package com.example.ezystore;
 
-import android.view.contentcapture.DataRemovalRequest;
 
 public class DataClass {
     private String imageURL, productName, description, price, ticket;
