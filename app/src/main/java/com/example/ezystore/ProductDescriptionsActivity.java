@@ -79,6 +79,7 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                 bag.put("Price",price);
                 bag.put("imageUrl",imageURL);
                 bag.put("Email",Email);
+                bag.put("count","1");
                 AddBag(bag);
                 Intent intent = new Intent(ProductDescriptionsActivity.this, HomeScreen.class);
                 startActivity(intent);

@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageButton;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,12 +31,13 @@ public class HomeScreen extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<Category> categoryList;
     private FirebaseFirestore firestore;
+    private ImageButton Cart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
+        Cart = findViewById(R.id.cart);
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, this);
@@ -75,6 +79,15 @@ public class HomeScreen extends AppCompatActivity {
         }else {
             loadDataFromFirestorefilter(adapter2.ticket);
         }
+
+        Cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, Cart.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
     }

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.EzyStore"
         tools:targetApi="31">
         <activity
+            android:name=".Cart"
+            android:exported="false" />
+        <activity
             android:name=".adminhomescreen"
             android:exported="false">
             <meta-data
