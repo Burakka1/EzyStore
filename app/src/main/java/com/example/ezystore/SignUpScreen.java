@@ -46,8 +46,9 @@ public class SignUpScreen extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(Email, Password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
+                        String userId = auth.getCurrentUser().getUid(); // Kullanıcının UID'sini al
                         Intent intent = new Intent(SignUpScreen.this, preliminaryinformation.class);
+                        intent.putExtra("Email", Email); // Kullanıcının UID'sini ikinci ekrana aktar
                         startActivity(intent);
                         finish();
                     }
@@ -57,6 +58,7 @@ public class SignUpScreen extends AppCompatActivity {
                         Toast.makeText(SignUpScreen.this, e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
+
             } else {
                 Toast.makeText(SignUpScreen.this, "Şifreler Uyuşmuyor!", Toast.LENGTH_LONG).show();
             }

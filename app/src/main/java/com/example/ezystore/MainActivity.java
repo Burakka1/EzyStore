@@ -15,6 +15,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private FirebaseAuth auth;
@@ -61,19 +65,39 @@ public class MainActivity extends AppCompatActivity {
                         sharedPreferences.edit().putString("Email",Email).apply();
                         sharedPreferences.edit().putString("Password",Password).apply();
                         sharedPreferences.edit().putBoolean("isboolean",true).apply();
-                        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
-                        startActivity(intent);
-                        finish();
-
-                    }else {
+                    } else {
                         sharedPreferences.edit().remove("Email").apply();
                         sharedPreferences.edit().remove("Password").apply();
                         sharedPreferences.edit().remove("isboolean").apply();
-
-                        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
-                        startActivity(intent);
-                        finish();
                     }
+
+                    FirebaseUser user = auth.getCurrentUser();
+                    String userId = user.getUid();
+
+                    // UserType bilgisini Firestore'dan kontrol et
+                    FirebaseFirestore.getInstance().collection("informations").document(userId)
+                            .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                @Override
+                                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                    String userType = documentSnapshot.getString("userType");
+
+                                    // UserType "admin" ise adminhomescreen'e yönlendir
+                                    if (userType != null && userType.equals("admin")) {
+                                        Intent intent = new Intent(MainActivity.this, adminhomescreen.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(MainActivity.this, "Veritabanı hatası: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
 
 
                 }
@@ -83,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Email veya Şifre Hatalı!", Toast.LENGTH_LONG).show();
                 }
             });
+
 
         }
 
