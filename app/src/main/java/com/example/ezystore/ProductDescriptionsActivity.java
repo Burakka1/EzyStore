@@ -12,9 +12,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ProductDescriptionsActivity extends AppCompatActivity {
 
@@ -27,6 +33,10 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private String productName;
     private String imageURL;
+    private String price;
+    private  String  Email;
+    private String description;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +50,18 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
         buttonAddToCart = findViewById(R.id.buttonAddToCart);
 
         firestore = FirebaseFirestore.getInstance();
+        Map<String ,String > bag = new HashMap<>();
 
         // productName ve imageURL değerlerini intent'ten al
         Intent intent = getIntent();
         if (intent != null) {
             productName = intent.getStringExtra("productName");
             imageURL = intent.getStringExtra("imageURL");
+             Email = getIntent().getStringExtra("Email");
+
         }
+
+
 
 
 
@@ -60,8 +75,14 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
         buttonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Sepete ekleme işlemlerini burada gerçekleştirin
-                // ...
+                bag.put("ProductName",productName);
+                bag.put("Price",price);
+                bag.put("imageUrl",imageURL);
+                bag.put("Email",Email);
+                AddBag(bag);
+                Intent intent = new Intent(ProductDescriptionsActivity.this, HomeScreen.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
@@ -77,8 +98,8 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
-                            String description = documentSnapshot.getString("description");
-                            String price = documentSnapshot.getString("price");
+                             description = documentSnapshot.getString("description");
+                             price = documentSnapshot.getString("price");
                             imageURL = documentSnapshot.getString("imageURL");
 
                             // Ürün resmini yükle
@@ -96,5 +117,25 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                         Log.e("ProductDescriptions", "Error getting product details from Firestore: " + e.getMessage());
                     }
                 });
+    }
+
+    private void AddBag(Map productsToAdd){
+
+
+       firestore.collection("Bag")
+                .add(productsToAdd)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        documentReference.update(productsToAdd);
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
     }
 }

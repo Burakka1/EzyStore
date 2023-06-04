@@ -9,12 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
     private ArrayList<DataClass> dataList;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    public String Email;
     private Context context;
-
     public MyAdapter(ArrayList<DataClass> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;
@@ -58,8 +62,11 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View v) {
                 // ProductDescriptions ekranına geçiş yapma işlemlerini burada gerçekleştirin
                 String productName = dataList.get(position).getProductName();
+                Email = user.getEmail();
                 Intent intent = new Intent(context, ProductDescriptionsActivity.class);
                 intent.putExtra("productName", productName);
+                intent.putExtra("Email",Email);
+
                 context.startActivity(intent);
             }
         });
