@@ -11,13 +11,15 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
 
+
+        <item name="toolbarStyle">@style/CustomToolbar</item>
     </style>
-    <style name="Theme.EzyStore.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+
+    <style name="CustomToolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/white</item>
+        <item name="titleTextColor">@color/blue</item>
+        <item name="titleCentered">true</item>
+        <item name="titleMarginStart">160dp</item>
     </style>
-    <style name="Theme.EzyStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.EzyStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

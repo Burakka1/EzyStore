@@ -28,6 +28,7 @@
         android:layout_marginBottom="16dp"
         android:hint="E-posta adresinizi giriniz"
         android:inputType="textEmailAddress"
+        android:textColor="#000000"
         android:textColorHint="#808080"
         app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +43,7 @@
         android:layout_marginBottom="7dp"
         android:hint="Şifrenizi giriniz"
         android:inputType="textPassword"
+        android:textColor="#000000"
         android:textColorHint="#808080"
         app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
@@ -95,6 +97,7 @@
         android:layout_width="110dp"
         android:layout_height="35dp"
         android:text="Beni Hatırla"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/passwordEditText"
         app:layout_constraintTop_toTopOf="parent" />
