@@ -4,22 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,12 +27,14 @@ public class HomeScreen extends AppCompatActivity {
     private List<Category> categoryList;
     private FirebaseFirestore firestore;
     private ImageButton Cart;
+    private ImageButton Home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Cart = findViewById(R.id.cart);
+        Home = findViewById(R.id.Home);
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, this);
@@ -47,7 +44,7 @@ public class HomeScreen extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         categoryList = new ArrayList<>();
-        adapter2 = new CategoryAdapter(categoryList,this);
+        adapter2 = new CategoryAdapter(categoryList, this);
         recyclerView.setAdapter(adapter2);
 
         firestore = FirebaseFirestore.getInstance();
@@ -74,9 +71,9 @@ public class HomeScreen extends AppCompatActivity {
                         // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
-        if (adapter2.ticket.equals("Home")){
+        if (adapter2.ticket.equals("Home")) {
             loadDataFromFirestore();
-        }else {
+        } else {
             loadDataFromFirestorefilter(adapter2.ticket);
         }
 
@@ -86,9 +83,16 @@ public class HomeScreen extends AppCompatActivity {
                 Intent intent = new Intent(HomeScreen.this, Cart.class);
                 startActivity(intent);
                 finish();
+
             }
         });
 
+        Home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadDataFromFirestore();
+            }
+        });
 
     }
 
@@ -113,8 +117,9 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 });
     }
-     void loadDataFromFirestorefilter(String ticket) {
-        db.collection("Products").whereEqualTo("ticket",ticket)
+
+    void loadDataFromFirestorefilter(String ticket) {
+        db.collection("Products").whereEqualTo("ticket", ticket)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

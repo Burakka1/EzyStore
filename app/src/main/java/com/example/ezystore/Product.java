@@ -1,22 +1,17 @@
 package com.example.ezystore;
 
 public class Product {
-    private String productName;
-    private String price;
-    private String imageUrl;
-    private String count;
-    private String id;
+    private String productName, price, imageUrl, count, id, email, formattedDate;
 
-    public Product() {
 
-    }
-
-    public Product(String productName, String price, String imageUrl, String count, String id) {
+    public Product(String productName, String price, String imageUrl, String count, String id, String email, String formattedDate) {
         this.productName = productName;
         this.price = price;
         this.imageUrl = imageUrl;
         this.count = count;
         this.id = id;
+        this.email = email;
+        this.formattedDate = formattedDate;
     }
 
     public String getProductName() {
@@ -58,5 +53,20 @@ public class Product {
     public void setId(String id) {
         this.id = id;
     }
-}
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFormattedDate() {
+        return formattedDate;
+    }
+
+    public void setFormattedDate(String formattedDate) {
+        this.formattedDate = formattedDate;
+    }
+}

@@ -2,7 +2,6 @@
 <!-- item_cart.xml -->
 
 <!-- item_cart.xml -->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -39,13 +38,43 @@
             android:textColor="@android:color/darker_gray"
             android:text="Product Price"/>
 
-        <TextView
-            android:id="@+id/count"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@android:color/black"
-            android:text="Adet"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ImageButton
+                android:id="@+id/decreaseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_add_24"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:text="Adet"/>
+
+            <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"/>
+
+            <ImageButton
+                android:id="@+id/increaseButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/outline_remove_24"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <ImageButton
@@ -56,4 +85,5 @@
         android:layout_gravity="bottom|end"/>
 
 </LinearLayout>
+
 

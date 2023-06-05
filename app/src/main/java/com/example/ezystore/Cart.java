@@ -4,94 +4,95 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 
 public class Cart extends AppCompatActivity {
 
     private CartAdapter adapter;
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ArrayList<Product> productList = new ArrayList<>();
-    private String User;
-    Integer amount;
-    List<Integer> amountList = new ArrayList<>();
-    TextView textTotal;
-    Button siparisadd;
+    private List<Product> productList = new ArrayList<>();
+    private String user;
+    private Integer amount;
+    private List<Integer> amountList = new ArrayList<>();
+    private TextView textTotal;
+    private Button siparisadd;
+    private ImageButton Home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
+        Home = findViewById(R.id.Home);
         FirebaseAuth auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-        User = user.getEmail();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            user = currentUser.getEmail();
+        }
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new CartAdapter(productList);
-        recyclerView.setAdapter(adapter);
         textTotal = findViewById(R.id.textTotal);
         siparisadd = findViewById(R.id.siparisadd);
 
-        loadDataFromFirestore();
+        adapter = new CartAdapter(productList, this, textTotal); // CartAdapter oluşturucuya totalText parametresini ekledik
+        recyclerView.setAdapter(adapter);
 
+        loadDataFromFirestore();
 
         siparisadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addOrdersToFirestore();
+            }
+        });
 
-                db.collection("Bag")
-                        .whereEqualTo("Email", User)
-                        .get()
-                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                            @Override
-                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                                    String productId = document.getId();
-                                    // ID'yi kullanarak istediğiniz işlemleri yapabilirsiniz
-                                    // Örneğin, Toast mesajıyla ID'yi gösterebiliriz:
-                                    Toast.makeText(Cart.this, "Öğe ID'si: " + productId, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                // Hata durumunda yapılacak işlemleri buraya ekleyin
-                            }
-                        });
+        Home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cart.this,HomeScreen.class);
+                startActivity(intent);
+                finish();
             }
         });
 
     }
 
     private void loadDataFromFirestore() {
-        db.collection("Bag").whereEqualTo("Email", User)
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        String formattedDate = dateFormat.format(today);
+        db.collection("Bag").whereEqualTo("Email", user)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         productList.clear();
-                        amountList.clear(); // amountList'i temizle
+                        amountList.clear();
                         Integer total = 0;
                         amount = 0;
 
@@ -101,8 +102,10 @@ public class Cart extends AppCompatActivity {
                             String imageUrl = document.getString("imageUrl");
                             String count = document.getString("count");
                             String id = document.getId();
+                            String email = document.getString("Email");
 
-                            Product dataClass = new Product(productName, price, imageUrl, count, id);
+
+                            Product dataClass = new Product(productName, price, imageUrl, count, id, email, formattedDate);
                             productList.add(dataClass);
 
                             total = Integer.parseInt(price);
@@ -112,7 +115,6 @@ public class Cart extends AppCompatActivity {
                             amountList.add(amount);
                         }
 
-                        // Toplam miktarı hesapla
                         Integer totalAmount = 0;
                         for (int price : amountList) {
                             totalAmount += price;
@@ -131,7 +133,49 @@ public class Cart extends AppCompatActivity {
                 });
     }
 
+    private void addOrdersToFirestore() {
+        for (Product product : productList) {
+            db.collection("Orders").add(product)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            deleteProductFromBag(product.getId());
+                            Intent intent = new Intent(Cart.this, HomeScreen.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Cart.this, "Sipariş verilirken bir hata oluştu.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
+    }
+
+    private void deleteProductFromBag(String productId) {
+        db.collection("Bag").document(productId)
+                .delete()
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Cart.this, "Siparişiniz Alındı.", Toast.LENGTH_SHORT).show();
+                        refreshCart();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Cart.this, "Sipariş verirken bir hata oluştu.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     public void refreshCart() {
         loadDataFromFirestore();
     }
+
 }
+
+
