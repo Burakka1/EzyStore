@@ -56,7 +56,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB11OA_QEB-3t5vEajTP7dUnPzb5Jfcitg" />
+            android:value="AIzaSyBo03crhAN3Qu6kIoP5wh4ugQJpr0-K7C8" />
 
         <activity
             android:name=".MapsActivity"
@@ -81,13 +81,7 @@
         <activity
             android:name=".HomeScreen"
             android:exported="false" />
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
                                     } else {
-                                        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+                                        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                                         startActivity(intent);
                                         finish();
                                     }
