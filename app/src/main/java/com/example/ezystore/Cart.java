@@ -62,7 +62,7 @@ public class Cart extends AppCompatActivity {
         textTotal = findViewById(R.id.textTotal);
         siparisadd = findViewById(R.id.siparisadd);
 
-        adapter = new CartAdapter(productList, this, textTotal); // CartAdapter oluşturucuya totalText parametresini ekledik
+        adapter = new CartAdapter(productList, this, textTotal);
         recyclerView.setAdapter(adapter);
 
         loadDataFromFirestore();
@@ -80,6 +80,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showConfirmationDialog();
+
 
             }
         });
@@ -154,11 +155,12 @@ public class Cart extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             deleteProductFromBag(product.getId());
-                            Toast.makeText(Cart.this, "Siparişiniz Başarıyla Tamamlandı", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Cart.this, HomeScreen.class);
                             startActivity(intent);
                             finish();
+
                         }
+
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -198,6 +200,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 addOrdersToFirestore();
+                Toast.makeText(Cart.this, "Siparişiniz Başarıyla Tamamlandı", Toast.LENGTH_SHORT).show();
 
             }
         });

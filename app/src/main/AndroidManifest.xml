@@ -16,6 +16,20 @@
         android:theme="@style/Theme.EzyStore"
         tools:targetApi="31">
         <activity
+            android:name=".past_order_details"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".past_orders"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Profile"
             android:exported="false">
             <meta-data

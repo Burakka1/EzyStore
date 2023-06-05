@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -30,14 +32,15 @@ import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
-    private TextView textFullName, textPhoneNumber, textEmail;
-    private EditText editFullName, editPhoneNumber, editEmail,editAdress;
+    private TextView textFullName, textPhoneNumber;
+    private EditText editFullName, editPhoneNumber, editAdress;
     private Button btnEdit, btnSave;
     private ImageButton cart2,home2,profile;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +50,8 @@ public class Profile extends AppCompatActivity {
         profile = findViewById(R.id.Profile);
         textFullName = findViewById(R.id.textFullName);
         textPhoneNumber = findViewById(R.id.textPhoneNumber);
-        textEmail = findViewById(R.id.textEmail);
         editFullName = findViewById(R.id.editFullName);
         editPhoneNumber = findViewById(R.id.editPhoneNumber);
-        editEmail = findViewById(R.id.editEmail);
         editAdress = findViewById(R.id.editAddress);
         btnEdit = findViewById(R.id.btnEdit);
         btnSave = findViewById(R.id.btnSave);
@@ -80,7 +81,6 @@ public class Profile extends AppCompatActivity {
 
                                 editFullName.setText(fullName);
                                 editPhoneNumber.setText(phoneNumber);
-                                editEmail.setText(email);
                                 editAdress.setText(adress);
                             }
                         }
@@ -123,9 +123,12 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Kaydet düğmesine tıklanınca EditText'teki bilgiler güncellenir ve tekrar devre dışı bırakılır
-                btnSave.setVisibility(View.INVISIBLE);
-                updateUserInfo();
-                disableEditMode();
+
+                if (validatePhoneNumber()) {
+                    updateUserInfo();
+                    disableEditMode();
+                    btnSave.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }
@@ -141,7 +144,9 @@ public class Profile extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menu_item1) {
-            // Öğe 1'e tıklandığında yapılacak işlemler
+            Intent intent = new Intent(Profile.this, past_orders.class);
+            startActivity(intent);
+            finish();
             return true;
         } else if (id == R.id.menu_item2) {
             Intent intent = new Intent(Profile.this, PasswordReset.class);
@@ -161,14 +166,12 @@ public class Profile extends AppCompatActivity {
     private void enableEditMode() {
         editFullName.setEnabled(true);
         editPhoneNumber.setEnabled(true);
-        editEmail.setEnabled(true);
         editAdress.setEnabled(true);
     }
 
     private void disableEditMode() {
         editFullName.setEnabled(false);
         editPhoneNumber.setEnabled(false);
-        editEmail.setEnabled(false);
         editAdress.setEnabled(false);
     }
 
@@ -176,7 +179,6 @@ public class Profile extends AppCompatActivity {
         // EditText'teki bilgileri al ve Firebase Firestore'e güncelleme yap
         String updatedFullName = editFullName.getText().toString();
         String updatedPhoneNumber = editPhoneNumber.getText().toString();
-        String updatedEmail = editEmail.getText().toString();
         String updatedAdress = editAdress.getText().toString();
 
         if (currentUser != null) {
@@ -196,8 +198,7 @@ public class Profile extends AppCompatActivity {
                                 Map<String, Object> updatedInfo = new HashMap<>();
                                 updatedInfo.put("FullName", updatedFullName);
                                 updatedInfo.put("PhoneNumber", updatedPhoneNumber);
-                                updatedInfo.put("Email", updatedEmail);
-                                updatedInfo.put("Email", updatedAdress);
+                                updatedInfo.put("Adress", updatedAdress);
 
                                 db.collection("informations")
                                         .document(documentId)
@@ -225,4 +226,14 @@ public class Profile extends AppCompatActivity {
                     });
         }
     }
+
+    private boolean validatePhoneNumber() {
+        String phoneNumber = editPhoneNumber.getText().toString().trim();
+        if (phoneNumber.length() < 10 || !phoneNumber.matches("\\d+")) {
+            Toast.makeText(Profile.this, "Telefon numaranızı başında sıfır olmadan 10 hane giriniz", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
 }
+
