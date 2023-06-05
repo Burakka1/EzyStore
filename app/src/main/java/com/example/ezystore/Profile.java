@@ -152,6 +152,37 @@ public class Profile extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_item1) {
+            Intent intent = new Intent(Profile.this, past_orders.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (id == R.id.menu_item2) {
+            Intent intent = new Intent(Profile.this, PasswordReset.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (id == R.id.menu_item3) {
+            Intent intent = new Intent(Profile.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     private void enableEditMode() {
         editFullName.setEnabled(true);
         editPhoneNumber.setEnabled(true);

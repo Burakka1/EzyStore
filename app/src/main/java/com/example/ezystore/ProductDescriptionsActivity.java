@@ -65,13 +65,13 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
 
 
 
-        // Ürün adını göster
+
         textProductName.setText(productName);
 
-        // Firestore'dan ürünün detaylarını al
+
         getProductDetailsFromFirestore();
 
-        // Sepete Ekle butonuna tıklama olayını ekle
+
         buttonAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,10 +103,10 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                              price = documentSnapshot.getString("price");
                             imageURL = documentSnapshot.getString("imageURL");
 
-                            // Ürün resmini yükle
+
                             Glide.with(ProductDescriptionsActivity.this).load(imageURL).into(imageProduct);
 
-                            // Açıklamayı ve fiyatı göster
+
                             textDescription.setText(description);
                             textTotal.setText(price);
                         }
