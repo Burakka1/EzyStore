@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -66,7 +68,8 @@ public class Cart extends AppCompatActivity {
         siparisadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addOrdersToFirestore();
+                showConfirmationDialog();
+
             }
         });
 
@@ -174,6 +177,29 @@ public class Cart extends AppCompatActivity {
 
     public void refreshCart() {
         loadDataFromFirestore();
+    }
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Cart.this);
+        builder.setTitle("Sipariş Onayı");
+        builder.setMessage("Siparişi onaylıyor musunuz?");
+
+        builder.setPositiveButton("Evet", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                addOrdersToFirestore();
+                Toast.makeText(Cart.this, "Siparişiniz Başarıyla Tamamlandı", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        builder.setNegativeButton("Hayır", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
