@@ -28,11 +28,13 @@ public class HomeScreen extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private ImageButton Cart;
     private ImageButton Home;
+    private ImageButton Profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+        Profile =findViewById(R.id.Profile);
         Cart = findViewById(R.id.cart);
         Home = findViewById(R.id.Home);
         gridView = findViewById(R.id.gridView);
@@ -77,6 +79,14 @@ public class HomeScreen extends AppCompatActivity {
             loadDataFromFirestorefilter(adapter2.ticket);
         }
 
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeScreen.this, Profile.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         Cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -9,11 +9,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-        android:layout_width="398dp"
-        android:layout_height="556dp"
+        android:layout_width="399dp"
+        android:layout_height="512dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.73"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
@@ -24,11 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/button_rounded"
         android:text="Sipariş ver"
+        app:layout_constraintBottom_toTopOf="@+id/cart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/textTotalTitle"
@@ -36,17 +39,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="8dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="Toplam Tutar"
         android:textColor="@android:color/black"
-        android:textSize="16sp"
 
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/Home"
         app:layout_constraintEnd_toStartOf="@+id/siparisadd"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
+        app:layout_constraintVertical_bias="0.87" />
 
     <TextView
         android:id="@+id/textTotal"
@@ -54,10 +58,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="28dp"
         android:textColor="#F80000"
+        app:layout_constraintBottom_toTopOf="@+id/Home"
         app:layout_constraintEnd_toStartOf="@+id/siparisadd"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textTotalTitle" />
 
@@ -80,7 +83,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/outline_shopping_cart_24" />
+        app:srcCompat="@drawable/selected_cart" />
 
     <ImageButton
         android:id="@+id/Profile"

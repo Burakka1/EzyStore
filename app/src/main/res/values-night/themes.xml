@@ -16,8 +16,8 @@
     </style>
 
     <style name="CustomToolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/white</item>
-        <item name="titleTextColor">@color/blue</item>
+        <item name="android:background">#1852BF</item>
+        <item name="titleTextColor">@color/white</item>
         <item name="titleCentered">true</item>
         <item name="titleMarginStart">160dp</item>
     </style>

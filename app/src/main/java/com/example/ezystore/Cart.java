@@ -41,12 +41,14 @@ public class Cart extends AppCompatActivity {
     private TextView textTotal;
     private Button siparisadd;
     private ImageButton Home;
+    private ImageButton Profile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         Home = findViewById(R.id.Home);
+        Profile = findViewById(R.id.Profile);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
@@ -65,6 +67,15 @@ public class Cart extends AppCompatActivity {
 
         loadDataFromFirestore();
 
+        Profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cart.this, Profile.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
         siparisadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +154,7 @@ public class Cart extends AppCompatActivity {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
                             deleteProductFromBag(product.getId());
+                            Toast.makeText(Cart.this, "Siparişiniz Başarıyla Tamamlandı", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Cart.this, HomeScreen.class);
                             startActivity(intent);
                             finish();
@@ -163,7 +175,6 @@ public class Cart extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(Cart.this, "Siparişiniz Alındı.", Toast.LENGTH_SHORT).show();
                         refreshCart();
                     }
                 })
@@ -187,7 +198,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 addOrdersToFirestore();
-                Toast.makeText(Cart.this, "Siparişiniz Başarıyla Tamamlandı", Toast.LENGTH_LONG).show();
+
             }
         });
 
