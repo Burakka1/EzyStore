@@ -2,6 +2,7 @@ package com.example.ezystore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,11 +29,12 @@ public class adminhomescreen extends AppCompatActivity {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private List<Category> categoryList;
     private FirebaseFirestore firestore;
-
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminhomescreen);
+        searchView = (SearchView) findViewById(R.id.searchView1);
 
         gridView = findViewById(R.id.gridView1);
         dataList = new ArrayList<>();
@@ -70,6 +72,22 @@ public class adminhomescreen extends AppCompatActivity {
                         // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadDataFromFirestoreSearchFilter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                loadDataFromFirestoreSearchFilter(newText);
+                return true;
+            }
+        });
+
+
         if (adapter2.ticket.equals("Home")){
             loadDataFromFirestore();
         }else {
@@ -109,7 +127,30 @@ public class adminhomescreen extends AppCompatActivity {
         });
 
     }
-
+    void loadDataFromFirestoreSearchFilter(final String query) {
+        db.collection("Products")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        dataList.clear();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            String productName = document.getString("productName");
+                            if (productName != null && productName.toLowerCase().contains(query.toLowerCase())) {
+                                DataClass dataClass = document.toObject(DataClass.class);
+                                dataList.add(dataClass);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Failed to load data: " + e.getMessage());
+                    }
+                });
+    }
     void loadDataFromFirestorefilter(String ticket) {
         db.collection("Products").whereEqualTo("ticket",ticket)
                 .get()
