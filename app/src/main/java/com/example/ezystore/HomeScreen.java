@@ -38,7 +38,6 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-
         searchView = (SearchView) findViewById(R.id.searchView);
         Profile = findViewById(R.id.Profile);
         Cart = findViewById(R.id.cart);
@@ -127,19 +126,19 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
-    void loadDataFromFirestoreSearchFilter(String query) {
-
+    void loadDataFromFirestoreSearchFilter(final String query) {
         db.collection("Products")
-                .whereGreaterThanOrEqualTo("productName", query)
-                .whereLessThan("productName", query + "\uf8ff")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                         dataList.clear();
                         for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                            DataClass dataClass = document.toObject(DataClass.class);
-                            dataList.add(dataClass);
+                            String productName = document.getString("productName");
+                            if (productName != null && productName.toLowerCase().contains(query.toLowerCase())) {
+                                DataClass dataClass = document.toObject(DataClass.class);
+                                dataList.add(dataClass);
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }
@@ -151,6 +150,8 @@ public class HomeScreen extends AppCompatActivity {
                     }
                 });
     }
+
+
 
     private void loadDataFromFirestore() {
         db.collection("Products")
