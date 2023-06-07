@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
@@ -56,11 +55,11 @@ public class MyAdapter extends BaseAdapter {
         gridCaption.setText(dataList.get(position).getProductName());
         gridCaption2.setText(dataList.get(position).getPrice());
 
-        // Kart tıklama olayını burada tanımlayalım
+
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ProductDescriptions ekranına geçiş yapma işlemlerini burada gerçekleştirin
+
                 String productName = dataList.get(position).getProductName();
                 Email = user.getEmail();
                 Intent intent = new Intent(context, ProductDescriptionsActivity.class);

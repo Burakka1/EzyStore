@@ -1,5 +1,6 @@
 package com.example.ezystore;
 
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import androidx.appcompat.widget.SearchView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -29,18 +31,23 @@ public class HomeScreen extends AppCompatActivity {
     private ImageButton Cart;
     private ImageButton Home;
     private ImageButton Profile;
+    private SearchView searchView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        Profile =findViewById(R.id.Profile);
+
+        searchView = (SearchView) findViewById(R.id.searchView);
+        Profile = findViewById(R.id.Profile);
         Cart = findViewById(R.id.cart);
         Home = findViewById(R.id.Home);
         gridView = findViewById(R.id.gridView);
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, this);
         gridView.setAdapter(adapter);
+
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -63,16 +70,17 @@ public class HomeScreen extends AppCompatActivity {
                             }
                             adapter2.notifyDataSetChanged();
                         } else {
-                            // Veri yoksa veya sorgu başarısız olduysa yapılacak işlemler
+
                         }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(Exception e) {
-                        // Sorgu başarısız olduysa yapılacak işlemler
+
                     }
                 });
+
         if (adapter2.ticket.equals("Home")) {
             loadDataFromFirestore();
         } else {
@@ -87,13 +95,27 @@ public class HomeScreen extends AppCompatActivity {
                 finish();
             }
         });
+
         Cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeScreen.this, Cart.class);
                 startActivity(intent);
                 finish();
+            }
+        });
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                loadDataFromFirestoreSearchFilter(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                loadDataFromFirestoreSearchFilter(newText);
+                return true;
             }
         });
 
@@ -103,7 +125,31 @@ public class HomeScreen extends AppCompatActivity {
                 loadDataFromFirestore();
             }
         });
+    }
 
+    void loadDataFromFirestoreSearchFilter(String query) {
+
+        db.collection("Products")
+                .whereGreaterThanOrEqualTo("productName", query)
+                .whereLessThan("productName", query + "\uf8ff")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        dataList.clear();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            DataClass dataClass = document.toObject(DataClass.class);
+                            dataList.add(dataClass);
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Firestore", "Failed to load data: " + e.getMessage());
+                    }
+                });
     }
 
     private void loadDataFromFirestore() {
@@ -129,7 +175,8 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     void loadDataFromFirestorefilter(String ticket) {
-        db.collection("Products").whereEqualTo("ticket", ticket)
+        db.collection("Products")
+                .whereEqualTo("ticket", ticket)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
