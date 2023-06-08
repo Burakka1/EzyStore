@@ -50,8 +50,14 @@ public class Profile extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
         btnSave = findViewById(R.id.btnSave);
         btnSave2=findViewById(R.id.btnSave2);
-        btnSave.setEnabled(isclicked);
-        btnSave2.setEnabled(isclicked);
+        if (!isEditMode){
+            btnSave.setEnabled(true);
+            btnSave2.setEnabled(true);
+        }else {
+            btnSave.setEnabled(isclicked);
+            btnSave2.setEnabled(isclicked);
+        }
+
         String address = getIntent().getStringExtra("address");
         isEditMode = getIntent().getBooleanExtra("edit_mode", false);
         editAddress.setText(address);
