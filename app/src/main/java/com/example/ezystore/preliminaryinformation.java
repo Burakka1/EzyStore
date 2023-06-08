@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.ezystore.databinding.ActivityPreliminaryinformationBinding;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 
 public class preliminaryinformation extends AppCompatActivity {
 
+    MapsActivity location = new MapsActivity();
     private ActivityPreliminaryinformationBinding binding;
     private FirebaseAuth auth;
     private FirebaseFirestore firebaseFirestore;
@@ -36,7 +39,6 @@ public class preliminaryinformation extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
     }
-
     public void Save(View view) {
 
         fullname = binding.fullName.getText().toString();
@@ -79,11 +81,6 @@ public class preliminaryinformation extends AppCompatActivity {
             }
         }
 
-    }
-    public void map(View view){
-        Intent intent = new Intent(preliminaryinformation.this, MapsActivity.class);
-        startActivity(intent);
-        finish();
     }
 
 

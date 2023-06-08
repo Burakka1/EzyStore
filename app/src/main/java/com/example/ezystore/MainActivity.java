@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void Login(View view) {
 
-         Email = binding.EmailEditText.getText().toString();
-         Password = binding.passwordEditText.getText().toString();
+         Email =binding.EmailEditText.getText().toString();
+         Password =binding.passwordEditText.getText().toString();
 
         if (Email.equals("") || Password.equals("")) {
 

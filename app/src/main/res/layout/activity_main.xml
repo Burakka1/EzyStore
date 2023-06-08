@@ -4,47 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/signin"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="156dp"
         android:text="Hoş Geldiniz"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/EmailEditText"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:paddingLeft="10dp"
         android:id="@+id/EmailEditText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
-        android:hint="E-posta adresinizi giriniz"
+        android:background="@drawable/rounded_edittext"
+        android:hint=" E-posta adresinizi giriniz"
         android:inputType="textEmailAddress"
+        android:shadowColor="#FFFFFF"
         android:textColor="#000000"
-        android:textColorHint="#808080"
+        android:textColorHint="#CDBBBB"
         app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
+        android:paddingLeft="10dp"
         android:id="@+id/passwordEditText"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="7dp"
-        android:hint="Şifrenizi giriniz"
+        android:background="@drawable/rounded_edittext"
+        android:hint=" Şifrenizi giriniz"
         android:inputType="textPassword"
         android:textColor="#000000"
-        android:textColorHint="#808080"
+        android:textColorHint="#cdbbbb"
         app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,7 +82,8 @@
         android:layout_marginEnd="64dp"
         android:onClick="PasswordReset"
         android:text="Şifreni mi unuttun?"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBaseline_toBaselineOf="@+id/singUp"
         app:layout_constraintEnd_toStartOf="@+id/singUp"
         app:layout_constraintStart_toStartOf="@+id/LoginButton" />
@@ -88,7 +96,7 @@
         android:layout_marginEnd="64dp"
         android:onClick="SingUp"
         android:text="Üye ol"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/LoginButton"
         app:layout_constraintTop_toBottomOf="@+id/LoginButton" />
 
@@ -97,7 +105,7 @@
         android:layout_width="110dp"
         android:layout_height="35dp"
         android:text="Beni Hatırla"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/passwordEditText"
         app:layout_constraintTop_toTopOf="parent" />

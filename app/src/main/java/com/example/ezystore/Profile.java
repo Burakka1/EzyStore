@@ -52,9 +52,12 @@ public class Profile extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnSave2=findViewById(R.id.btnSave2);
         String address = getIntent().getStringExtra("address");
+
         isEditMode = getIntent().getBooleanExtra("edit_mode", false);
+
         if (isEditMode==true){
             isclicked=true;
+
             btnSave.setEnabled(isclicked);
             btnSave2.setEnabled(isclicked);
         }else {
@@ -63,7 +66,7 @@ public class Profile extends AppCompatActivity {
         }
 
 
-        editAddress.setText(address);
+
 
 
         db = FirebaseFirestore.getInstance();
@@ -91,6 +94,7 @@ public class Profile extends AppCompatActivity {
                                 editAddress.setText(Adress);
 
                                 if (isEditMode) {
+                                    editAddress.setText(address);
                                     enableEditMode(isclicked);
                                 }
                             }
@@ -144,6 +148,7 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     @Override
