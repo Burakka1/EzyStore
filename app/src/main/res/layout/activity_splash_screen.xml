@@ -8,7 +8,7 @@
     tools:context=".SplashScreen">
     <ImageView
         android:id="@+id/Ezystore_logo"
-        android:src="@drawable/img"
+        android:src="@drawable/img2"
         android:layout_width="350dp"
         android:layout_height="200dp"
         app:layout_constraintLeft_toLeftOf="parent"
