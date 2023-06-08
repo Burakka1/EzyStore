@@ -58,12 +58,6 @@ public class past_orders extends AppCompatActivity {
                         }
                         adapter.notifyDataSetChanged();
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("Firestore", "Failed to load data: " + e.getMessage());
-                    }
                 });
     }
 }

@@ -54,7 +54,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        sendLocationButton.setText("Send Location");
+        sendLocationButton.setText("Konumu Gönder");
     }
 
     @Override

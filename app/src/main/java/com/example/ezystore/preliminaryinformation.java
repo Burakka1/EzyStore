@@ -23,7 +23,6 @@ public class preliminaryinformation extends AppCompatActivity {
     String fullname;
     String adress;
     String phoneNumber;
-    String Email;
     HashMap<String, Object> postData = new HashMap();
 
     @Override
@@ -55,9 +54,6 @@ public class preliminaryinformation extends AppCompatActivity {
                 postData.put("PhoneNumber", phoneNumber);
                 String Email = getIntent().getStringExtra("Email");
                 postData.put("Email", Email);
-
-
-                //postData.put("Email",Email);
 
                 firebaseFirestore.collection("informations").add(postData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

@@ -17,7 +17,7 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        mediaPlayer = MediaPlayer.create(this, R.raw.soundsplash); // "SoundSplash" yerine ses dosyanızın ismini kullanın
+        mediaPlayer = MediaPlayer.create(this, R.raw.soundsplash);
         mediaPlayer.start();
 
         ImageView logoImageView = findViewById(R.id.Ezystore_logo);

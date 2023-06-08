@@ -72,12 +72,6 @@ public class HomeScreen extends AppCompatActivity {
 
                         }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-
-                    }
                 });
 
         if (adapter2.ticket.equals("Home")) {

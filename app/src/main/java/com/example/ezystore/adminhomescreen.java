@@ -62,14 +62,7 @@ public class adminhomescreen extends AppCompatActivity {
                             }
                             adapter2.notifyDataSetChanged();
                         } else {
-                            // Veri yoksa veya sorgu başarısız olduysa yapılacak işlemler
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
 

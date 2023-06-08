@@ -68,8 +68,6 @@ public class Profile extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
 
         invalidateOptionsMenu();
-
-        // Firestore'dan kullanıcının bilgilerini al ve EditText'lere yerleştir
         if (currentUser != null) {
             String userEmail = currentUser.getEmail();
 
@@ -95,12 +93,6 @@ public class Profile extends AppCompatActivity {
                                 }
                             }
                         }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Hata durumunda hata mesajı gösterebilirsiniz
-                        }
                     });
         }
 
@@ -125,7 +117,6 @@ public class Profile extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Edit düğmesine tıklanınca EditText'lere düzenlenebilir hale gelir
                 btnSave.setVisibility(View.VISIBLE);
                 enableEditMode();
             }
@@ -134,11 +125,11 @@ public class Profile extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Kaydet düğmesine tıklanınca EditText'teki bilgiler güncellenir ve tekrar devre dışı bırakılır
                 if (validatePhoneNumber()) {
                     updateUserInfo();
                     disableEditMode();
                     btnSave.setVisibility(View.INVISIBLE);
+                    btnSave2.setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -198,7 +189,6 @@ public class Profile extends AppCompatActivity {
     }
 
     private void updateUserInfo() {
-        // EditText'teki bilgileri al ve Firebase Firestore'e güncelleme yap
         String updatedFullName = editFullName.getText().toString();
         String updatedPhoneNumber = editPhoneNumber.getText().toString();
         String updatedAddress = editAddress.getText().toString();
@@ -228,22 +218,9 @@ public class Profile extends AppCompatActivity {
                                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                                             @Override
                                             public void onSuccess(Void aVoid) {
-                                                // Güncelleme işlemi başarılı olduğunda gerçekleştirilecek işlemler
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                // Hata durumunda hata mesajı gösterebilirsiniz
                                             }
                                         });
                             }
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Hata durumunda hata mesajı gösterebilirsiniz
                         }
                     });
         }

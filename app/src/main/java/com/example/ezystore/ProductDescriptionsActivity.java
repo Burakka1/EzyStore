@@ -51,8 +51,6 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
 
         firestore = FirebaseFirestore.getInstance();
         Map<String ,String > bag = new HashMap<>();
-
-        // productName ve imageURL değerlerini intent'ten al
         Intent intent = getIntent();
         if (intent != null) {
             productName = intent.getStringExtra("productName");
@@ -111,12 +109,6 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                             textTotal.setText(price);
                         }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("ProductDescriptions", "Error getting product details from Firestore: " + e.getMessage());
-                    }
                 });
     }
 
@@ -129,11 +121,6 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         documentReference.update(productsToAdd);
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
 
                     }
                 });

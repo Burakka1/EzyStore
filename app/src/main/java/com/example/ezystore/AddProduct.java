@@ -84,14 +84,8 @@ public class AddProduct extends AppCompatActivity {
                             spinnerOptions.setAdapter(adapter);
 
                         } else {
-                            // Veri yoksa veya sorgu başarısız olduysa yapılacak işlemler
+
                         }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(Exception e) {
-                        // Sorgu başarısız olduysa yapılacak işlemler
                     }
                 });
 
@@ -162,7 +156,6 @@ public class AddProduct extends AppCompatActivity {
                     throw task.getException();
                 }
 
-                // Resmin indirme URL'sini alma
                 return imageReference.getDownloadUrl();
             }
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -176,7 +169,6 @@ public class AddProduct extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    // Başarı durumunda yapılacak işlemler
                                     Toast.makeText(AddProduct.this, "Resim Başarıyla Yüklendi", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(AddProduct.this, HomeScreen.class);
                                     startActivity(intent);
@@ -186,12 +178,10 @@ public class AddProduct extends AppCompatActivity {
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    // Hata durumunda yapılacak işlemler
                                     Toast.makeText(AddProduct.this, "Hata oluştu: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             });
                 } else {
-                    // Hata durumunda yapılacak işlemler
                     Toast.makeText(AddProduct.this, "Resim yüklenirken hata oluştu: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -205,22 +195,13 @@ public class AddProduct extends AppCompatActivity {
     }
 
     private void SaveFirestore(Map Name){
-
-
         db.collection("Category")
                 .add(Name)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         documentReference.update(Name);
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-
                     }
                 });
-
     }
 }

@@ -46,9 +46,9 @@ public class SignUpScreen extends AppCompatActivity {
                 auth.createUserWithEmailAndPassword(Email, Password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        String userId = auth.getCurrentUser().getUid(); // Kullanıcının UID'sini al
+                        String userId = auth.getCurrentUser().getUid();
                         Intent intent = new Intent(SignUpScreen.this, preliminaryinformation.class);
-                        intent.putExtra("Email", Email); // Kullanıcının UID'sini ikinci ekrana aktar
+                        intent.putExtra("Email", Email);
                         startActivity(intent);
                         finish();
                     }

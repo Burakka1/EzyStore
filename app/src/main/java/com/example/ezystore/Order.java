@@ -3,7 +3,6 @@ package com.example.ezystore;
 public class Order {
     private String productName, price, imageUrl, count,  email, formattedDate;
     public Order() {
-        // Gerekli değer atamalarını yapabilirsiniz
     }
     public Order(String productName, String price, String imageUrl, String count, String email, String formattedDate) {
         this.productName = productName;

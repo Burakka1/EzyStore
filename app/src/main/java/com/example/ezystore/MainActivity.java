@@ -73,15 +73,11 @@ public class MainActivity extends AppCompatActivity {
 
                     FirebaseUser user = auth.getCurrentUser();
                     String userId = user.getUid();
-
-                    // UserType bilgisini Firestore'dan kontrol et
                     FirebaseFirestore.getInstance().collection("informations").document(userId)
                             .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                 @Override
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                     String userType = documentSnapshot.getString("userType");
-
-                                    // UserType "admin" ise adminhomescreen'e yönlendir
                                     if (userType != null && userType.equals("admin")) {
                                         Intent intent = new Intent(MainActivity.this, adminhomescreen.class);
                                         startActivity(intent);
