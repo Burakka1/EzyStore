@@ -169,8 +169,8 @@ public class AddProduct extends AppCompatActivity {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Toast.makeText(AddProduct.this, "Resim Başarıyla Yüklendi", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(AddProduct.this, HomeScreen.class);
+                                    Toast.makeText(AddProduct.this, "Ürün Başarıyla Yüklendi", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(AddProduct.this, adminhomescreen.class);
                                     startActivity(intent);
                                     finish();
                                 }
