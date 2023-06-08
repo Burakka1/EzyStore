@@ -2,6 +2,9 @@ package com.example.ezystore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,12 +22,13 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductDescriptionsActivity extends AppCompatActivity {
 
-    private ImageView imageProduct;
     private TextView textProductName;
     private TextView textDescription;
     private TextView textTotal;
@@ -33,17 +37,18 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private String productName;
     private String imageURL;
+    private String imageURL2;
     private String price;
     private  String  Email;
     private String description;
-
+    List<String> photoList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_descriptions);
 
-        imageProduct = findViewById(R.id.imageProduct);
+
         textProductName = findViewById(R.id.textProductName);
         textDescription = findViewById(R.id.textDescription);
         textTotal = findViewById(R.id.textTotal);
@@ -59,9 +64,11 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
 
         }
 
+        ImageAdapter adapter = new ImageAdapter(photoList);
 
-
-
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewimage);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)); // Yatay bir liste için
+        recyclerView.setAdapter(adapter);
 
 
         textProductName.setText(productName);
@@ -100,10 +107,9 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
                              description = documentSnapshot.getString("description");
                              price = documentSnapshot.getString("price");
                             imageURL = documentSnapshot.getString("imageURL");
-
-
-                            Glide.with(ProductDescriptionsActivity.this).load(imageURL).into(imageProduct);
-
+                            imageURL2 = documentSnapshot.getString("imageURL2");
+                            photoList.add(imageURL);
+                            photoList.add(imageURL2);
 
                             textDescription.setText(description);
                             textTotal.setText(price + " Tl");
