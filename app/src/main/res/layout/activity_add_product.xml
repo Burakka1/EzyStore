@@ -8,6 +8,34 @@
 
     <!-- Ürün Resmi -->
 
+    <Button
+
+        android:id="@+id/buttonUploadImage2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageProduct"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="44dp"
+        android:background="@drawable/button_rounded"
+        android:text="RESİM YÜKLE"
+        android:textColor="@android:color/white" />
+
+    <ImageView
+        android:id="@+id/imageProduct2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@+id/textProductImage"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="229dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="64dp"
+        android:background="@drawable/rounded_corner"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_question_mark_24" />
+
     <TextView
         android:id="@+id/textProductName"
         android:layout_width="wrap_content"
@@ -70,9 +98,9 @@
         android:layout_below="@+id/textProductImage"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="151dp"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="140dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="228dp"
         android:background="@drawable/rounded_corner"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_baseline_question_mark_24" />
@@ -94,8 +122,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageProduct"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="133dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="207dp"
         android:background="@drawable/button_rounded"
         android:text="RESİM YÜKLE"
         android:textColor="@android:color/white" />

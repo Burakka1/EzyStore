@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,34 +34,39 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AddProduct extends AppCompatActivity {
 
     private Button buttonUploadImage;
-    Button addbutton;
-    private ImageView imageProduct;
-    EditText editProductName;
-    EditText editDescription;
-    EditText categoryNameText;
-    EditText editProductPrice;
+    private Button buttonUploadImage2;
     private Button buttonAddProduct;
-    private Uri ImageUri;
+    private ImageView imageProduct;
+    private ImageView imageProduct2;
+    private EditText editProductName;
+    private EditText editDescription;
+    private EditText categoryNameText;
+    private EditText editProductPrice;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Spinner spinnerOptions;
+    private Uri imageUri1;
+    private Uri imageUri2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+
+        buttonUploadImage2 = findViewById(R.id.buttonUploadImage2);
         buttonAddProduct = findViewById(R.id.buttonAddProduct);
-        addbutton = findViewById(R.id.addbutton);
         editProductName = findViewById(R.id.editProductName);
         editDescription = findViewById(R.id.editDescription);
         categoryNameText = findViewById(R.id.categoryNameText);
         buttonUploadImage = findViewById(R.id.buttonUploadImage);
         imageProduct = findViewById(R.id.imageProduct);
+        imageProduct2 = findViewById(R.id.imageProduct2);
         spinnerOptions = findViewById(R.id.spinnerOptions);
         editProductPrice = findViewById(R.id.editProductPrice);
 
@@ -82,37 +88,6 @@ public class AddProduct extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<>(AddProduct.this,
                                     android.R.layout.simple_spinner_dropdown_item, options);
                             spinnerOptions.setAdapter(adapter);
-
-                        } else {
-
-                        }
-                    }
-                });
-
-
-
-        addbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Category.put("CategoryName",categoryNameText.getText().toString());
-                SaveFirestore(Category); // silincek denemelık yazdık
-                categoryNameText.setText("");
-                recreate(); // ekran yenileme yapıyor
-
-            }
-        });
-
-        ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        if (result.getResultCode() == Activity.RESULT_OK) {
-                            Intent data = result.getData();
-                            ImageUri = data.getData();
-                            imageProduct.setImageURI(ImageUri);
-                        } else {
-                            Toast.makeText(AddProduct.this, "Seçili Resim Yok", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -123,17 +98,25 @@ public class AddProduct extends AppCompatActivity {
                 Intent photoPicker = new Intent();
                 photoPicker.setAction(Intent.ACTION_GET_CONTENT);
                 photoPicker.setType("image/*");
-                activityResultLauncher.launch(photoPicker);
+                startActivityForResult(photoPicker, 1);
+            }
+        });
+
+        buttonUploadImage2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent photoPicker = new Intent();
+                photoPicker.setAction(Intent.ACTION_GET_CONTENT);
+                photoPicker.setType("image/*");
+                startActivityForResult(photoPicker, 2);
             }
         });
 
         buttonAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ImageUri != null) {
-                    uploadToFirebase(ImageUri);
-
-
+                if (imageUri1 != null && imageUri2 != null) {
+                    uploadToFirebase(imageUri1, imageUri2);
                 } else {
                     Toast.makeText(AddProduct.this, "Lütfen Resim Seçiniz", Toast.LENGTH_SHORT).show();
                 }
@@ -141,30 +124,68 @@ public class AddProduct extends AppCompatActivity {
         });
     }
 
-    private void uploadToFirebase(Uri uri) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                imageUri1 = data.getData();
+                imageProduct.setImageURI(imageUri1);
+            } else if (requestCode == 2) {
+                imageUri2 = data.getData();
+                imageProduct2.setImageURI(imageUri2);
+            }
+        } else {
+            Toast.makeText(AddProduct.this, "Seçili Resim Yok", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void uploadToFirebase(Uri uri1, Uri uri2) {
         String productName = editProductName.getText().toString();
         String description = editDescription.getText().toString();
         String price = editProductPrice.getText().toString();
         String ticket = spinnerOptions.getSelectedItem().toString();
-        final StorageReference imageReference = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri));
-        UploadTask uploadTask = imageReference.putFile(uri);
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+        final StorageReference imageReference1 = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri1));
+        UploadTask uploadTask1 = imageReference1.putFile(uri1);
+
+        final StorageReference imageReference2 = storageReference.child(System.currentTimeMillis() + "." + getFileExtension(uri2));
+        UploadTask uploadTask2 = imageReference2.putFile(uri2);
+
+        Task<Uri> urlTask1 = uploadTask1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                 if (!task.isSuccessful()) {
                     throw task.getException();
                 }
 
-                return imageReference.getDownloadUrl();
+                return imageReference1.getDownloadUrl();
             }
-        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+        });
+
+        Task<Uri> urlTask2 = uploadTask2.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
             @Override
-            public void onComplete(@NonNull Task<Uri> task) {
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+
+                return imageReference2.getDownloadUrl();
+            }
+        });
+
+        Task<List<Uri>> combinedTask = Tasks.whenAllSuccess(urlTask1, urlTask2);
+
+        combinedTask.addOnCompleteListener(new OnCompleteListener<List<Uri>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<Uri>> task) {
                 if (task.isSuccessful()) {
-                    Uri downloadUri = task.getResult();
-                    // Resmin URL'sini Firestore'a ekleme
-                    DataClass dataClass = new DataClass(downloadUri.toString(), productName, description,price,ticket);
+                    List<Uri> downloadUris = task.getResult();
+                    Uri downloadUri1 = downloadUris.get(0);
+                    Uri downloadUri2 = downloadUris.get(1);
+
+                    // Resim URL'lerini Firestore'a ekleme
+                    DataClass dataClass = new DataClass(downloadUri1.toString(), productName, description, price, ticket, downloadUri2.toString());
                     db.collection("Products").add(dataClass)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
@@ -205,3 +226,4 @@ public class AddProduct extends AppCompatActivity {
                 });
     }
 }
+
