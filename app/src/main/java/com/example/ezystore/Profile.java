@@ -39,6 +39,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
         cart2 = findViewById(R.id.cart2);
         home2 = findViewById(R.id.home2);
         profile = findViewById(R.id.profile);
@@ -50,16 +51,18 @@ public class Profile extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
         btnSave = findViewById(R.id.btnSave);
         btnSave2=findViewById(R.id.btnSave2);
-        if (!isEditMode){
-            btnSave.setEnabled(true);
-            btnSave2.setEnabled(true);
+        String address = getIntent().getStringExtra("address");
+        isEditMode = getIntent().getBooleanExtra("edit_mode", false);
+        if (isEditMode==true){
+            isclicked=true;
+            btnSave.setEnabled(isclicked);
+            btnSave2.setEnabled(isclicked);
         }else {
             btnSave.setEnabled(isclicked);
             btnSave2.setEnabled(isclicked);
         }
 
-        String address = getIntent().getStringExtra("address");
-        isEditMode = getIntent().getBooleanExtra("edit_mode", false);
+
         editAddress.setText(address);
 
 
@@ -128,8 +131,8 @@ public class Profile extends AppCompatActivity {
                 if (validatePhoneNumber()) {
                     updateUserInfo();
                     disableEditMode();
-                    btnSave.setVisibility(View.INVISIBLE);
-                    btnSave2.setVisibility(View.INVISIBLE);
+                    isclicked=false;
+                    enableEditMode(isclicked);
                 }
             }
         });
