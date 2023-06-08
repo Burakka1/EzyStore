@@ -9,8 +9,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 
 public class MyAdapter extends BaseAdapter {
@@ -18,6 +23,7 @@ public class MyAdapter extends BaseAdapter {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     public String Email;
     private Context context;
+    String userType;
     public MyAdapter(ArrayList<DataClass> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;
@@ -55,22 +61,52 @@ public class MyAdapter extends BaseAdapter {
         gridCaption.setText(dataList.get(position).getProductName());
         gridCaption2.setText(dataList.get(position).getPrice()+" TL");
 
+            Email = user.getEmail();
+            controlType();
+
+
+
+
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String productName = dataList.get(position).getProductName();
-                Email = user.getEmail();
-                Intent intent = new Intent(context, ProductDescriptionsActivity.class);
-                intent.putExtra("productName", productName);
-                intent.putExtra("Email",Email);
-
-                context.startActivity(intent);
+                if (userType != null && userType.equals("admin")){
+                    Intent intent = new Intent(context, AdminProductDetails.class);
+                    intent.putExtra("productName", productName);
+                    intent.putExtra("Email",Email);
+                    context.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(context, ProductDescriptionsActivity.class);
+                    intent.putExtra("productName", productName);
+                    intent.putExtra("Email",Email);
+                    context.startActivity(intent);
+                }
+              ;
             }
         });
 
         return convertView;
     }
+    private void controlType() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("informations")
+                .whereEqualTo("Email", Email)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        if (!queryDocumentSnapshots.isEmpty()) {
+                            DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
+                             userType = documentSnapshot.getString("userType");
+
+
+                        }
+                    }
+                });
+    }
+
 }
 

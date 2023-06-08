@@ -1,15 +1,9 @@
 package com.example.ezystore;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.menu.MenuBuilder;
-import androidx.appcompat.view.menu.MenuPopupHelper;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextThemeWrapper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,6 +32,7 @@ public class Profile extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private boolean isEditMode = false;
+    private boolean isclicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +41,7 @@ public class Profile extends AppCompatActivity {
 
         cart2 = findViewById(R.id.cart2);
         home2 = findViewById(R.id.home2);
-        profile = findViewById(R.id.Profile);
+        profile = findViewById(R.id.profile);
         textFullName = findViewById(R.id.textFullName);
         textPhoneNumber = findViewById(R.id.textPhoneNumber);
         editFullName = findViewById(R.id.editFullName);
@@ -57,12 +50,13 @@ public class Profile extends AppCompatActivity {
         btnEdit = findViewById(R.id.btnEdit);
         btnSave = findViewById(R.id.btnSave);
         btnSave2=findViewById(R.id.btnSave2);
-
+        btnSave.setEnabled(isclicked);
+        btnSave2.setEnabled(isclicked);
         String address = getIntent().getStringExtra("address");
         isEditMode = getIntent().getBooleanExtra("edit_mode", false);
         editAddress.setText(address);
 
-        // Firebase Firestore ve Auth örnekleri al
+
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
@@ -81,7 +75,6 @@ public class Profile extends AppCompatActivity {
                                 DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
                                 String fullName = documentSnapshot.getString("FullName");
                                 String phoneNumber = documentSnapshot.getString("PhoneNumber");
-                                String email = documentSnapshot.getString("Email");
                                 String Adress = documentSnapshot.getString("Adress");
 
                                 editFullName.setText(fullName);
@@ -89,7 +82,7 @@ public class Profile extends AppCompatActivity {
                                 editAddress.setText(Adress);
 
                                 if (isEditMode) {
-                                    enableEditMode();
+                                    enableEditMode(isclicked);
                                 }
                             }
                         }
@@ -117,8 +110,9 @@ public class Profile extends AppCompatActivity {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnSave.setVisibility(View.VISIBLE);
-                enableEditMode();
+
+                isclicked = !isclicked;
+                enableEditMode(isclicked);
             }
         });
 
@@ -156,7 +150,6 @@ public class Profile extends AppCompatActivity {
         if (id == R.id.menu_item1) {
             Intent intent = new Intent(Profile.this, past_orders.class);
             startActivity(intent);
-            finish();
             return true;
         } else if (id == R.id.menu_item2) {
             Intent intent = new Intent(Profile.this, PasswordReset.class);
@@ -174,12 +167,13 @@ public class Profile extends AppCompatActivity {
     }
 
 
-    private void enableEditMode() {
-        editFullName.setEnabled(true);
-        editPhoneNumber.setEnabled(true);
-        editAddress.setEnabled(true);
-        btnSave.setVisibility(View.VISIBLE);
-        btnSave2.setVisibility(View.VISIBLE);
+    private void enableEditMode(Boolean isclicked) {
+
+        editFullName.setEnabled(isclicked);
+        editPhoneNumber.setEnabled(isclicked);
+        editAddress.setEnabled(isclicked);
+        btnSave.setEnabled(isclicked);
+        btnSave2.setEnabled(isclicked);
     }
 
     private void disableEditMode() {
@@ -206,7 +200,6 @@ public class Profile extends AppCompatActivity {
                                 DocumentSnapshot documentSnapshot = queryDocumentSnapshots.getDocuments().get(0);
                                 String documentId = documentSnapshot.getId();
 
-                                // Bilgileri güncelle
                                 Map<String, Object> updatedInfo = new HashMap<>();
                                 updatedInfo.put("FullName", updatedFullName);
                                 updatedInfo.put("PhoneNumber", updatedPhoneNumber);

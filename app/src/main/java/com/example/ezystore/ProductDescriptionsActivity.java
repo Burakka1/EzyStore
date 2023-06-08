@@ -106,7 +106,7 @@ public class ProductDescriptionsActivity extends AppCompatActivity {
 
 
                             textDescription.setText(description);
-                            textTotal.setText(price);
+                            textTotal.setText(price + " Tl");
                         }
                     }
                 });

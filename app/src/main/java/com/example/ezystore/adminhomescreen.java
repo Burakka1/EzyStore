@@ -35,7 +35,6 @@ public class adminhomescreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adminhomescreen);
         searchView = (SearchView) findViewById(R.id.searchView1);
-
         gridView = findViewById(R.id.gridView1);
         dataList = new ArrayList<>();
         adapter = new MyAdapter(dataList, this);
